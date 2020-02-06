@@ -1,0 +1,121 @@
+// PLACEHOLDERS
+%flex {
+	display: flex;
+	flex-flow: wrap;
+}
+
+.navbar {
+	@extend %flex;
+	flex: 0 0 100%;
+    height: 80px;
+	background-color: #fff;
+    box-shadow: 13px -2px 17px -12px rgba(41,50,66,.1);
+	-webkit-box-shadow: 13px -2px 17px -12px rgba(41,50,66,.1);
+
+	// TABLET
+	@media(min-width: 748px) {
+		width: (120/1920) * 100vw;
+		height: 100vh;
+		justify: {
+			content: center;
+			items: center;
+		}
+		align: {
+			items: flex-start;
+			content: flex-start;
+		}
+		position: fixed;
+		top: 0;
+		left: 0;
+	}
+
+	&_logo {
+		flex: 0 0 auto;
+		background: {
+			image: url('./logo.svg');
+			repeat: no-repeat;
+		}
+
+		// TABLET
+		@media(min-width: 748px) {
+			width: (80/1920) * 100vw;
+			height: (80/1920) * 100vw;
+			margin: {
+				top: (40/1080) * 100vh;
+				bottom: (20/1080) * 100vh;
+			}
+		}
+
+	}
+
+	&_menu {
+		@extend %flex;
+		margin: 0;
+		padding: 0;
+		flex: 1 0 100%;
+		list-style: none;
+
+		&-item {
+			flex: 1 0 100%;
+			justify-content: center;
+			position: relative;
+
+			&:after {
+				content: "";
+				width: 30%;
+				height: 2px;
+				background: #f9f9fc;
+				position: absolute;
+				bottom: 10px; 
+				left: 50%;
+				transform: translateX(-50%);
+			}
+		}
+		&-link {
+			@extend %flex;
+			padding: (20/1080) * 100vh;
+
+			justify-content: center;
+
+			svg {
+				width: (36/1920) * 100vw;
+				height: (36/1920) * 100vw;
+
+				path {
+					fill: #B8BAC3;
+					transition: fill 175ms ease-in;
+				}
+			}
+
+			&:hover {
+				svg>path {
+					fill: #007a63;
+					transition: fill 300ms ease-out;
+				}
+				.navbar_menu-label {
+					color: #007a63;
+					transform: translateY(0);
+					opacity: 1;
+					transition: opacity 300ms ease-out, transform 600ms ease-out;
+				}
+			}
+		}
+		&-label {
+			flex: 1 0 100%;
+			padding: (10/1080) * 100vh 0;
+			font: {
+				size: 10px;
+				weight: 500;
+			}
+			text: {
+				align: center;
+				transform: uppercase;
+			}
+			color: #8a88a2;
+			line-height: 12px;
+			transform: translateY(5px);
+			opacity: 0;
+			transition: opacity 175ms ease-in, transform 175ms ease-in;
+		}
+	}
+}

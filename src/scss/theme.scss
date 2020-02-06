@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700');
+
+
+body {
+	margin: 0;
+	background: #f9f9fc;
+	font-size: 13px;
+	font-weight: 300;
+	font-family: Poppins,Helvetica,sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@import "components/placeholders";
+@import "components/reset";
+
+.App {
+	@extend %flex;
+}

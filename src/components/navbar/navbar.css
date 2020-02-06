@@ -1,0 +1,80 @@
+.navbar, .navbar_menu, .navbar_menu-link {
+  display: flex;
+  flex-flow: wrap; }
+
+.navbar {
+  flex: 0 0 100%;
+  height: 80px;
+  background-color: #fff;
+  box-shadow: 13px -2px 17px -12px rgba(41, 50, 66, 0.1);
+  -webkit-box-shadow: 13px -2px 17px -12px rgba(41, 50, 66, 0.1); }
+  @media (min-width: 748px) {
+    .navbar {
+      width: 6.25vw;
+      height: 100vh;
+      justify-content: center;
+      justify-items: center;
+      align-items: flex-start;
+      align-content: flex-start;
+      position: fixed;
+      top: 0;
+      left: 0; } }
+  .navbar_logo {
+    flex: 0 0 auto;
+    background-image: url("./logo.svg");
+    background-repeat: no-repeat; }
+    @media (min-width: 748px) {
+      .navbar_logo {
+        width: 4.16667vw;
+        height: 4.16667vw;
+        margin-top: 3.7037vh;
+        margin-bottom: 1.85185vh; } }
+  .navbar_menu {
+    margin: 0;
+    padding: 0;
+    flex: 1 0 100%;
+    list-style: none; }
+    .navbar_menu-item {
+      flex: 1 0 100%;
+      justify-content: center;
+      position: relative; }
+      .navbar_menu-item:after {
+        content: "";
+        width: 30%;
+        height: 2px;
+        background: #f9f9fc;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%); }
+    .navbar_menu-link {
+      padding: 1.85185vh;
+      justify-content: center; }
+      .navbar_menu-link svg {
+        width: 1.875vw;
+        height: 1.875vw; }
+        .navbar_menu-link svg path {
+          fill: #B8BAC3;
+          transition: fill 175ms ease-in; }
+      .navbar_menu-link:hover svg > path {
+        fill: #007a63;
+        transition: fill 300ms ease-out; }
+      .navbar_menu-link:hover .navbar_menu-label {
+        color: #007a63;
+        transform: translateY(0);
+        opacity: 1;
+        transition: opacity 300ms ease-out, transform 600ms ease-out; }
+    .navbar_menu-label {
+      flex: 1 0 100%;
+      padding: 0.92593vh 0;
+      font-size: 10px;
+      font-weight: 500;
+      text-align: center;
+      text-transform: uppercase;
+      color: #8a88a2;
+      line-height: 12px;
+      transform: translateY(5px);
+      opacity: 0;
+      transition: opacity 175ms ease-in, transform 175ms ease-in; }
+
+/*# sourceMappingURL=navbar.css.map */

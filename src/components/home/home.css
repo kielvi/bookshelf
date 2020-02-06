@@ -1,0 +1,16 @@
+.home {
+  display: flex;
+  flex-flow: wrap; }
+
+.home {
+  flex: 1 0;
+  padding: 1.85185vh 2.08333vw;
+  justify-content: center;
+  justify-items: flex-start;
+  align-content: flex-start;
+  align-items: flex-start; }
+  @media (min-width: 748px) {
+    .home {
+      margin-left: 6.25vw; } }
+
+/*# sourceMappingURL=home.css.map */

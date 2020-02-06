@@ -1,0 +1,24 @@
+// PLACEHOLDERS
+%flex {
+	display: flex;
+	flex-flow: wrap;
+}
+
+.home {
+	@extend %flex;
+	flex: 1 0;
+	padding: (20/1080) * 100vh (40/1920) * 100vw;
+	justify: {
+		content: center;
+		items: flex-start;
+	}
+	align: {
+		content: flex-start;
+		items: flex-start;
+	}
+
+	// TABLET
+	@media(min-width: 748px) {
+		margin-left: (120/1920) * 100vw;
+	}
+}
