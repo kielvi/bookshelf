@@ -5,7 +5,7 @@ import Category from '../category/';
 
 function Home() {
 	return (
-		<div className="home">
+		<div className="container home">
 			<Category />
 			<Category />
 			<Category />

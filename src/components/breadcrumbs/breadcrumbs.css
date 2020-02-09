@@ -1,0 +1,39 @@
+.breadcrumbs, .breadcrumbs_item, .breadcrumbs_item:after, .breadcrumbs_link {
+  display: flex;
+  flex-flow: wrap; }
+
+.breadcrumbs {
+  list-style: none;
+  align-items: center; }
+  .breadcrumbs_item {
+    flex: 0 0 auto;
+    position: relative;
+    font-size: 13px;
+    font-weight: 500;
+    color: #959cb6;
+    line-height: 13px;
+    align-items: center; }
+    .breadcrumbs_item:after {
+      width: 4px;
+      height: 4px;
+      margin: 0 8px;
+      background: #dbdce7;
+      border-radius: 50%;
+      content: " "; }
+    .breadcrumbs_item:last-child:after {
+      display: none; }
+  .breadcrumbs_link {
+    align-items: center;
+    color: #959cb6; }
+    .breadcrumbs_link:hover {
+      color: #434349; }
+  .breadcrumbs_icon {
+    width: 13px;
+    flex: 0 0 13px;
+    height: 19px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block; }
+    .breadcrumbs_icon.-home {
+      background-image: url("icon_home.svg"); }

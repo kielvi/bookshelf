@@ -1,0 +1,34 @@
+
+.button {
+	flex: 0 0 auto;
+	padding: (12/1080) * 100vh (20/1920) * 100vw;
+	font: {
+		size: 13px;
+		weight: 400;
+	}
+	color: #646c9a;
+	line-height: 19px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+
+	// Modifiers
+	&.-submit {
+		background-color: rgba(#007a63, .9);
+		color: #FFF;
+
+		&:hover {
+			background-color: #007a63;
+		}
+	}
+	&.-outline {
+		border-color: #e2e5ec;
+
+		&:hover {
+			border-color: #c1c5ce;
+		}
+	}
+	&.-mr_20 {
+		margin-right: (20/1920) * 100vw;
+	}
+
+}
