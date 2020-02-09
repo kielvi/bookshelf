@@ -18,7 +18,7 @@ function Form() {
 				<div className="portlet_content">
 
 				<form class="form">
-					<div className="form_group -w50">
+					<div className="form_group -w100">
 						<label for="title" className="form_label">Category</label>
 
 						<div className="categories">
@@ -43,28 +43,37 @@ function Form() {
 						<span className="form_validation">Error or just validation</span>
 					</div>
 
-					<div className="form_group -one_row">
-						<label for="title" className="form_label">ISBN</label>
-						<input name="title" id="title" type="text" placeholder="Write the ISBN number" className="form_input -w_auto" />
-						<span className="form_validation">Error or just validation</span>
-					</div>
+					<div className="form_column -w30">
+{/* style={{backgroundSize: "cover", backgroundImage: "url(" + "http://ia800602.us.archive.org/view_archive.php?archive=%2F24%2Fitems%2Folcovers95%2Folcovers95-M.zip&file=956754-M.jpg&ext=" + ")",}} */}
+						<div className="form_photo">
 
-					<div className="form_group">
-						<label for="title" className="form_label">Title</label>
-						<input name="title" id="title" type="text" placeholder="Write the title book" className="form_input" />
-						<span className="form_validation">Error or just validation</span>
-					</div>
+						</div>
 
-					<div className="form_group">
-						<label for="author" className="form_label">Author</label>
-						<input name="author" id="author" type="text" placeholder="Write the name author" className="form_input" />
-						<span className="form_validation">Error or just validation</span>
 					</div>
+					<div className="form_column">
+						<div className="form_group -one_row">
+							<label for="title" className="form_label">ISBN</label>
+							<input name="title" id="title" type="text" placeholder="Write the ISBN number" className="form_input -w_auto" />
+							<span className="form_validation">Error or just validation</span>
+						</div>
 
-					<div className="form_group -w100">
-						<label for="description" className="form_label">Description</label>
-						<textarea name="description" id="description" placeholder="Write the name description" className="form_input -textarea"></textarea>
-						<span className="form_validation">Error or just validation</span>
+						<div className="form_group">
+							<label for="title" className="form_label">Title</label>
+							<input name="title" id="title" type="text" placeholder="Write the title book" className="form_input" />
+							<span className="form_validation">Error or just validation</span>
+						</div>
+
+						<div className="form_group">
+							<label for="author" className="form_label">Author</label>
+							<input name="author" id="author" type="text" placeholder="Write the name author" className="form_input" />
+							<span className="form_validation">Error or just validation</span>
+						</div>
+
+						<div className="form_group -w100">
+							<label for="description" className="form_label">Description</label>
+							<textarea name="description" id="description" placeholder="Write the name description" className="form_input -textarea"></textarea>
+							<span className="form_validation">Error or just validation</span>
+						</div>
 					</div>
 				</form>
 
