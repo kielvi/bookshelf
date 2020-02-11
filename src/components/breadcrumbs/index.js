@@ -1,17 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './breadcrumbs.css';
 
-function Breadcrumbs() {
+const Breadcrumbs = (props) => {
+	const itemActive = props.itemActive;
+
 	return (
 		<ul className="breadcrumbs">
 			<li className="breadcrumbs_item">
-				<a href="javascript:void(0);" className="breadcrumbs_link"><i className="breadcrumbs_icon -home"></i></a>
+				<Link to='/' className="breadcrumbs_link-link">
+					<i className="breadcrumbs_icon -home"></i>
+				</Link>
 			</li>
 			<li className="breadcrumbs_item">
 				<a href="javascript:void(0);" className="breadcrumbs_link">Books</a>
 			</li>
 			<li className="breadcrumbs_item">
-				Insert new book
+				{itemActive}
 			</li>
 		</ul>
 	);
