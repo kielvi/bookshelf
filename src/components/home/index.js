@@ -4,8 +4,7 @@ import Category from '../category/';
 import api from '../../api';
 
 const Home = () => {
-	console.log( api.categories );
-	console.log( api.categories.asArray );
+
 	return (
 		<div className="container home">
 				{

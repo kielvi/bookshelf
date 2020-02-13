@@ -16,7 +16,7 @@ const Book = (props) => {
 	const itemActive = book.title;
 	const category = book.category;
 	const dateToFormat = '2020-02-10T20:02-0500';
-            
+	const totalComments = book.comments.length;
 
 	return (
 		<div className="container book">
@@ -82,7 +82,7 @@ const Book = (props) => {
 						<i className="book_label-icon -comments"></i>
 						<div className="book_label-content">
 							<div className="book_label-title">Comments</div>
-							<Link to="" className="book_label-link">678 comments</Link>
+							<div className="book_label-text">{totalComments >0 ? totalComments+" comment(s)" : "" }</div>
 						</div>
 					</div>
 				</div>

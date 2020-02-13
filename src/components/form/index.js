@@ -25,8 +25,6 @@ class Form extends React.Component {
 		/*this.history = useHistory();*/
 		this.handleInputChange	= this.handleInputChange.bind(this);
 		this.handleSubmit		= this.handleSubmit.bind(this);
-
-		window.teste = this;
 	}
 
 	handleInputChange(event) {
@@ -41,7 +39,6 @@ class Form extends React.Component {
 		});
 	}
 
-
 	handleSubmit(event) {
 		event.preventDefault();
 		let book = api.booksAPI.save(this.state);
@@ -50,7 +47,6 @@ class Form extends React.Component {
 	}
 
 	render() {
-		console.log(this.state)
 		return (
 			<div className="container">
 				<div className="headings">
