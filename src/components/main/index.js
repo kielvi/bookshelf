@@ -13,7 +13,8 @@ const Main = () => (
 		<Switch>
 			<Route exact path="/" component={Home} />
 			<Route path="/categories/" component={Form} />
-			<Route path='/book/:number' component={Book}/>
+			<Route path="/book/:id/edit" component={Form} />
+			<Route path='/book/:id' component={Book}/>
 			<Route path="/insert-new-book/" component={Form} />
 		</Switch>
 	</main>

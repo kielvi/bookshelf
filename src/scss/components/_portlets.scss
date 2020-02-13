@@ -4,14 +4,52 @@
 	@extend %flex;
 	flex: 1 0 100%;
 	margin-bottom: (20/1080) * 100vh;
-	
 	box-shadow: 0 0 13px 0 rgba(82,63,105,.05);
 	background-color: #fff;
 	border-radius: 4px;
 
-	&_content {
+	// TABLET
+	@media(min-width: 748px) {
+		flex: 1 0;
+	}
+
+	// Modifiers
+	&.-w100 {
 		flex: 1 0 100%;
-		padding: (30/1080) * 100vh (24/1920) * 100vw;
+	}
+
+	&_head {
+		@extend %flex;
+		flex: 1 0 100%;
+		min-height: 60px;
+		padding: (25/1920) * 100vw;
+		border-bottom: 1px solid #ebedf2;
+		font: {
+			size: 15px;
+			weight: 500;
+		}
+		line-height: 19px;
+		color: #48465b;
+	}
+
+	&_content {
+		@extend %flex;
+		flex: 1 0 100%;
+
+		// TABLET
+		@media(min-width: 748px) {
+			padding: 20px;
+		}
+
+		// DESKTOP
+		@media(min-width: 992px) {
+			padding: (30/1080) * 100vh (24/1920) * 100vw;
+		}
+
+		// Modifiers
+		&.-align_items_center {
+			align-items: center;
+		}
 	}
 
 	&_footer {

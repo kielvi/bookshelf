@@ -13,7 +13,7 @@ const Breadcrumbs = (props) => {
 				</Link>
 			</li>
 			<li className="breadcrumbs_item">
-				<a href="javascript:void(0);" className="breadcrumbs_link">Books</a>
+				<Link to='/' className="breadcrumbs_link-link">Books</Link>
 			</li>
 			<li className="breadcrumbs_item">
 				{itemActive}

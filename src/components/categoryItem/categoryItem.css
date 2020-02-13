@@ -1,0 +1,77 @@
+.item, .item_container {
+  display: flex;
+  flex-flow: wrap; }
+
+.item {
+  flex: 1 0 100%;
+  padding: 1.38889vh 1.5625vw; }
+  @media (min-width: 748px) {
+    .item {
+      flex: 1 0 50%;
+      padding: 0.78125vw; } }
+  @media (min-width: 992px) {
+    .item {
+      flex: 0 0 20%; } }
+  .item_photo {
+    flex: 1 0 6.25vw;
+    max-width: 6.25vw;
+    height: 6.25vw;
+    background-image: url("http://ia800602.us.archive.org/view_archive.php?archive=%2F24%2Fitems%2Folcovers95%2Folcovers95-M.zip&file=956754-M.jpg&ext=");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 100%; }
+    .item_photo.-no_photo {
+      background-image: url("./no_photo.svg");
+      background-color: #f9f9fc;
+      background-size: 85%; }
+  .item_title {
+    flex: 1 0 100%;
+    padding: 1.85185vh;
+    font-size: 17px;
+    font-weight: 400;
+    color: #48465b;
+    text-align: center;
+    transition: color 175ms ease-in; }
+  .item_category {
+    flex: 0 0 auto;
+    height: 24px;
+    padding: 0.37037vh 0.52083vw;
+    background: rgba(72, 70, 91, 0.1);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #48465b; }
+    .item_category.-read {
+      background-color: rgba(29, 201, 183, 0.1);
+      color: #1dc9b7; }
+    .item_category.-reading {
+      background-color: rgba(34, 185, 255, 0.1);
+      color: #22b9ff; }
+    .item_category.-want {
+      background-color: rgba(255, 184, 34, 0.1);
+      color: #ffb822; }
+  .item_description {
+    flex: 1 0 100%;
+    padding: 1.85185vh;
+    font-size: 13px;
+    font-weight: 400;
+    color: #9396a1;
+    line-height: 18px;
+    text-align: center;
+    transition: color 175ms ease-in; }
+  .item_container {
+    flex: 1 0;
+    min-height: 180px;
+    padding: 2.31481vh 1.04167vw;
+    background: #fff;
+    box-shadow: 0 0 13px 0 rgba(82, 63, 105, 0.05);
+    border-radius: 4px;
+    justify-content: center;
+    transition: box-shadow 175ms ease-in; }
+  .item:hover .item_title {
+    color: #007a63;
+    transition: color 300ms ease-out; }
+  .item:hover .item_container {
+    box-shadow: 0 0 23px 0 rgba(82, 63, 105, 0.1);
+    transition: box-shadow 600ms ease-out; }

@@ -14,8 +14,10 @@ body {
 
 @import "components/reset";
 @import "components/placeholders";
+@import "components/form";
 @import "components/buttons";
 @import "components/portlets";
+
 
 .App {
 	@extend %flex;
