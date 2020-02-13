@@ -23,8 +23,63 @@ class Form extends React.Component {
 			this.state = api.booksAPI.get(props.match.params.id)
 
 		/*this.history = useHistory();*/
+		this.onSearchChange		= this.onSearchChange.bind(this);
+		this.setSearchISBN		= this.setSearchISBN.bind(this);
 		this.handleInputChange	= this.handleInputChange.bind(this);
 		this.handleSubmit		= this.handleSubmit.bind(this);
+	}
+
+
+	setSearchISBN(result, isbn) {
+		if(result.error) { 
+			this.setState({
+				'title'			: "",
+				'author'		: "",
+				'description'	: ""
+			});
+			return console.error(result.error);
+		}
+
+		const book 		 = result["ISBN:"+isbn].details;
+
+		let title 		 = book.title;
+		let author 		 = book.authors[0].name;
+		let description  = book.description;
+		let photo 		 = "https://covers.openlibrary.org/b/id/"+book.covers[0]+".jpg";
+
+		this.setState({
+			'title'			: title,
+			'author'		: author,
+			'description'	: description,
+			'photo'			: photo
+		});
+	}
+
+	onSearchChange(event) {
+		const isbn = event.target.value;
+
+		const library_base	 = 'https://openlibrary.org/api/books';
+		const library_search = '?bibkeys=ISBN:';
+		const library_type	 = '&jscmd=details&format=json';
+
+		this.setState({
+			'title'			: "Carregando",
+			'author'		: "Carregando",
+			'description'	: "Carregando"
+		});
+
+		fetch(`${library_base}${library_search}${isbn}${library_type}`)
+			.then((response) => response.json())
+			.then(function(response){
+			 	if(Object.keys(response).length) return response;
+			 	return {
+			 		error: 'livro nao encontrado'
+			 	} 
+			})
+			.then(response => this.setSearchISBN(response, isbn))
+			.catch(error => {
+				console.log('Error fetching and parsing data', error);
+			});
 	}
 
 	handleInputChange(event) {
@@ -47,6 +102,8 @@ class Form extends React.Component {
 	}
 
 	render() {
+		const { photo } = this.state;
+
 		return (
 			<div className="container">
 				<div className="headings">
@@ -88,7 +145,7 @@ class Form extends React.Component {
 							</div>
 
 							<div className="form_column -w30">
-								<div className="form_photo">
+								<div className="form_photo" style={{ backgroundImage:`url(${photo})`, backgroundSize:`cover` }}>
 									<input name="photo" value={this.state.photo} onChange={this.handleInputChange} type="hidden" />
 
 								</div>
@@ -96,7 +153,7 @@ class Form extends React.Component {
 							<div className="form_column">
 								<div className="form_group -one_row">
 									<label htmlFor="title" className="form_label">ISBN</label>
-									<input name="isbn" value={this.state.isbn} onChange={this.handleInputChange} type="text" placeholder="Write the ISBN number" className="form_input -w_auto" />
+									<input name="isbn" value="9780980200447" onChange={this.handleInputChange} onBlur={this.onSearchChange} type="text" placeholder="Write the ISBN number" className="form_input -w_auto" />
 									<span className="form_validation">Error or just validation</span>
 								</div>
 
