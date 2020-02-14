@@ -7,30 +7,40 @@
 .item {
 	@extend %flex;
 	flex: 1 0 100%;
-	padding: (15/1080) * 100vh (30/1920) * 100vw;
-
-	// TABLET
-	@media(min-width: 748px) {
-		flex: 1 0 50%;
-		padding: (15/1920) * 100vw;
+	padding: 15px 0;
+	align: {
+		items: flex-start;
+		content: flex-start;
 	}
 
 	// DESKTOP
 	@media(min-width: 992px) {
-		flex: 0 0 20%;
+		flex: 0 0 50%;
+		padding: 15px;
+	}
+	@media(min-width: 1300px) {
+		flex: 0 0 33.33%;
 	}
 
 	&_photo {
-		flex: 1 0 (120/1920) * 100vw;
-		max-width: (120/1920) * 100vw;
-		height: (120/1920) * 100vw;
+		flex: 0 0 120px;
+		max-height: 174px;
+		margin-right: 20px;
 		background: {
 			image: url('http://ia800602.us.archive.org/view_archive.php?archive=%2F24%2Fitems%2Folcovers95%2Folcovers95-M.zip&file=956754-M.jpg&ext=');
 			position: center;
 			repeat: no-repeat;
 			size: contain;
 		}
-		border-radius: 100%;
+		box-shadow: 0 0 13px rgba(#000, .1);
+		position: relative;
+
+		&:before {
+			display: block;
+			content: "";
+			width: 100%;
+			padding-top: (109 / 75) * 100%;
+		}
 
 		// MODIFIERS
 		&.-no_photo {
@@ -44,13 +54,24 @@
 
 	&_title {
 		flex: 1 0 100%;
-		padding: (20/1080) * 100vh;
 		font: {
 			size: 17px;
 			weight: 400;
 		}
 		color: #48465b;
-		text-align: center;
+
+		transition: color 175ms ease-in;
+	}
+
+	&_author {
+		flex: 1 0 100%;
+		margin-bottom: 20px;
+		font: {
+			size: 13px;
+			weight: 300;
+		}
+		color: #48465b;
+
 		transition: color 175ms ease-in;
 	}
 
@@ -58,6 +79,7 @@
 		flex: 0 0 auto;
 		height: 24px;
 		padding: (4/1080) * 100vh (10/1920) * 100vw;
+		margin-bottom: 15px;
 		background: rgba(#48465b, .1);
 		border-radius: 4px;
 		font: {
@@ -83,27 +105,43 @@
 
 	&_description {
 		flex: 1 0 100%;
-		padding: (20/1080) * 100vh;
 		font: {
 			size: 13px;
 			weight: 400;
 		}
 		color: #9396a1;
 		line-height: 18px;
-		text-align: center;
 		transition: color 175ms ease-in;
+	}
+
+	&_content {
+		@extend %flex;
+		flex: 1 0;
+		align: {
+			items: flex-start;
+			content: flex-start;
+		}
 	}
 
 	&_container {
 		@extend %flex;
 		flex: 1 0;
-		min-height: 180px;
-		padding: (25/1080) * 100vh (20/1920) * 100vw;
+		height: 100%;
+		padding: 25px 20px;
 		background: #fff;
 		box-shadow: 0 0 13px 0 rgba(82, 63, 105, .05);
 		border-radius: 4px;
-		justify-content: center;
+		align: {
+			items: flex-start;
+			content: flex-start;
+		}
+		justify-content: flex-start;
 		transition: box-shadow 175ms ease-in;
+
+		// DESKTOP
+		@media(min-width: 992px) {
+			padding: (25/1080) * 100vh (20/1920) * 100vw;
+		}
 	}
 
 

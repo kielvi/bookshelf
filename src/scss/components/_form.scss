@@ -43,6 +43,16 @@
 			left: 0;
 			content: "";
 		}
+
+		// Modifiers
+		&.-loading {
+			background: {
+				size: 90px;
+				position: center;
+				repeat: no-repeat;
+				image: url('../images/loading.gif');
+			}
+		}
 	}
 
 	&_group {

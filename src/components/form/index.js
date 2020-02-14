@@ -17,10 +17,12 @@ class Form extends React.Component {
 			author 		: '',
 			description : '',
 			deleted		: false,
+			photoLoading: ''
 		};
 
 		if(props.match.params.id)
 			this.state = api.booksAPI.get(props.match.params.id)
+
 
 		/*this.history = useHistory();*/
 		this.onSearchChange		= this.onSearchChange.bind(this);
@@ -32,26 +34,30 @@ class Form extends React.Component {
 
 	setSearchISBN(result, isbn) {
 		if(result.error) { 
+			this.photoLoading = "";
 			this.setState({
 				'title'			: "",
 				'author'		: "",
-				'description'	: ""
+				'description'	: "",
+				'photo'			: "",
+				'photoLoading'	: ""
 			});
 			return console.error(result.error);
 		}
 
 		const book 		 = result["ISBN:"+isbn].details;
-
 		let title 		 = book.title;
 		let author 		 = book.authors[0].name;
 		let description  = book.description;
 		let photo 		 = "https://covers.openlibrary.org/b/id/"+book.covers[0]+".jpg";
 
+
 		this.setState({
-			'title'			: title,
-			'author'		: author,
-			'description'	: description,
-			'photo'			: photo
+			'title'			: (title ? title : ''),
+			'author'		: (author ? author : ''),
+			'description'	: (description ? description : ''),
+			'photo'			: (photo ? photo : ''),
+			'photoLoading'	: false
 		});
 	}
 
@@ -62,10 +68,12 @@ class Form extends React.Component {
 		const library_search = '?bibkeys=ISBN:';
 		const library_type	 = '&jscmd=details&format=json';
 
+
 		this.setState({
-			'title'			: "Carregando",
-			'author'		: "Carregando",
-			'description'	: "Carregando"
+			'title'			: "Loading data",
+			'author'		: "Loading data",
+			'description'	: "Loading data",
+			'photoLoading'	: " -loading"
 		});
 
 		fetch(`${library_base}${library_search}${isbn}${library_type}`)
@@ -96,6 +104,7 @@ class Form extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		console.log(this.setState)
 		let book = api.booksAPI.save(this.state);
 
 		document.location.href="/book/"+book.id;
@@ -103,6 +112,7 @@ class Form extends React.Component {
 
 	render() {
 		const { photo } = this.state;
+		const { photoLoading } = this.state;
 
 		return (
 			<div className="container">
@@ -145,7 +155,7 @@ class Form extends React.Component {
 							</div>
 
 							<div className="form_column -w30">
-								<div className="form_photo" style={{ backgroundImage:`url(${photo})`, backgroundSize:`cover` }}>
+								<div className={`form_photo `+this.state.photoLoading} style={ photo ? { backgroundImage:`url(${photo})`, backgroundSize:`cover` } : null }>
 									<input name="photo" value={this.state.photo} onChange={this.handleInputChange} type="hidden" />
 
 								</div>
@@ -153,7 +163,7 @@ class Form extends React.Component {
 							<div className="form_column">
 								<div className="form_group -one_row">
 									<label htmlFor="title" className="form_label">ISBN</label>
-									<input name="isbn" value="9780980200447" onChange={this.handleInputChange} onBlur={this.onSearchChange} type="text" placeholder="Write the ISBN number" className="form_input -w_auto" />
+									<input name="isbn" value={this.state.isbn} onChange={this.handleInputChange} onBlur={this.onSearchChange} type="text" placeholder="Write the ISBN number" className="form_input -w_auto" />
 									<span className="form_validation">Error or just validation</span>
 								</div>
 

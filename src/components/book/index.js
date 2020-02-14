@@ -7,7 +7,6 @@ import Breadcrumbs from '../breadcrumbs/';
 import Comments from '../comments/';
 import './book.css';
 
-
 const Book = (props) => {
 	const book = api.booksAPI.get(
 		parseInt(props.match.params.id, 10)
@@ -17,6 +16,7 @@ const Book = (props) => {
 	const category = book.category;
 	const dateToFormat = '2020-02-10T20:02-0500';
 	const totalComments = book.comments.length;
+
 
 	return (
 		<div className="container book">
@@ -37,7 +37,7 @@ const Book = (props) => {
 							<Link to={`/book/${book.id}/edit`} className="button -sm -green -icon -edit">Edit book</Link>
 						</div>
 
-						<div className="book_description">{book.description}</div>
+						{book.description ? <div className="book_description">{book.description}</div> : null}
 
 
 						<div className="book_info">
@@ -47,7 +47,7 @@ const Book = (props) => {
 							</div>
 							<div className="book_info-item">
 								<div className="book_info-title">Category</div>
-								<Link to={`/books/${category}`} className={`book_info-label -${book.category_name}`}>{book.category_name}</Link>
+								<Link to={`/books/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
 							</div>
 						</div>
 					</div>

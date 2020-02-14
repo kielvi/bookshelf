@@ -12,12 +12,17 @@
 	&_title {
 		@extend %flex;
 		flex: 0 0 auto;
-		margin: 0 (15/1920) * 100vw;
+		margin-right: 15px;
 		font: {
 			size: 15px;
 			weight: 500;
 		}
 		color: #434349;
+
+		// DESKTOP
+		@media(min-width: 992px) {
+			margin: 0 (15/1920) * 100vw;
+		}
 
 		&:hover {
 			color: #007a63;
@@ -25,7 +30,7 @@
 	}
 
 	&_total {
-		flex: 0 0 auto;
+		flex: 1 0 auto;
 		position: relative;
 		font: {
 			size: 13px;
@@ -37,14 +42,26 @@
 			content: "";
 			width: 1px;
 			height: 22px;
-			margin: {
-				right: (12/1920) * 100vw;
-			}
+			margin-right: 12px;
 			background: #dbdce7;
 			border-radius: 2px;
 			position: relative;
 			display: inline-block;
 			vertical-align: bottom;
+
+			// DESKTOP
+			@media(min-width: 992px) {
+				margin-right: (12/1920) * 100vw;
+			}
+		}
+	}
+
+	&_sort {
+		flex: 0 0 200px;
+
+		// DESKTOP
+		@media(min-width: 992px) {
+			margin: 0 (15/1920) * 100vw;
 		}
 	}
 

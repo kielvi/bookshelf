@@ -2,17 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './categoryItem.css'
 
-const CategoryItem = (type) => {
-	
+const CategoryItem = (props) => {
+	let book = props.item;
+	let limit = 100;
+	let photo = props.item.photo;
+	let description = props.item.description;
 
 	return (
 		<div className="item">
-			<Link to='/book/1' className="item_container">
-				<div className="item_photo -no_photo"></div>
-				<div className="item_title">Framing 101 : how to take back public discourse</div>
-				<div className="item_category -read">Read</div>
-				<div className="item_description">
-					Know your values and frame the debate : the essential guide for progressives
+			<Link to={`/book/${book.id}`} className="item_container">
+				<div className={`item_photo `+(!photo ? "-no_photo":'')} style={ photo ? { backgroundImage:`url(${photo})`, backgroundSize:`cover` } : '' }></div>
+				<div className="item_content">
+					<div className="item_title">{book.title}</div>
+					<div className="item_author">{book.author}</div>
+					<div className={`item_category -${book.category_class}`}>{book.category_name}</div>
+
+					{description.length > limit ?
+						(
+							<div className="item_description">
+								{`${description.substring(0, limit)}...`}
+							</div>
+						) :
+							false
+					}
 				</div>
 			</Link>
 		</div>

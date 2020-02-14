@@ -17,6 +17,9 @@ class Book {
 	get category_name() {
 		return categories[this.category].name;
 	}
+	get category_class() {
+		return categories[this.category].class;
+	}
 
 	get comments() {
 		return booksAPI.comments[this.id] || [];
@@ -51,18 +54,22 @@ class Book {
 const categories = {
 	0: new Category({
 			"name"			: "Without category",
+			"class"			: "without",
 			"id"			: 0
 	}),
 	1:  new Category({
-			"name"			: "reading",
+			"name"			: "Reading",
+			"class"			: "reading",
 			"id"			: 1
 	}),
 	2:  new Category({
-			"name"			: "wantToRead",
+			"name"			: "Want to read",
+			"class"			: "wantToRead",
 			"id"			: 2
 	}),
 	3:  new Category({
-			"name"			: "read",
+			"name"			: "Read",
+			"class"			: "read",
 			"id"			: 3
 	}),
 	
@@ -80,37 +87,37 @@ const booksAPI = {
 	_books: [
 		{
 			"id"			: 1,
-			"timestamp"		: "",
+			"timestamp"		: 1581634369874,
 			"category"		: 1,
-			"title"			: "Linear and Geometric Algebra",
-			"description"	: "This textbook for the first undergraduate linear algebra course presents a unified treatment of linear algebra and geometric algebra, while covering most of the usual linear algebra topics.Geometric algebra is an extension of linear algebra. It enhances the treatment of many linear algebra topics. And geometric algebra does much more.\r\nGeometric algebra and its extension to geometric calculus unify, simplify, and generalize vast areas of mathematics that involve geometric ideas. They provide a unified mathematical language for many areas of physics, computer science, and other fields.\r\n\r\nThe book can be used for self study by those comfortable with the theorem/proof style of a mathematics text. This is a fifth printing, corrected and slightly revised.",
-			"author"		: "Alan Macdonald",
-			"isbn"			: "1453854932",
-			"photo"			: "https://covers.openlibrary.org/b/id/9261425.jpg",
+			"title"			: "React.js. Bystryy start",
+			"description"	: "",
+			"author"		: "Stoyan Stefanov",
+			"isbn"			: "9785496030038",
+			"photo"			: "https://covers.openlibrary.org/b/id/8749306.jpg",
 			"deleted"		: 0,
 
 		},
 		{
 			"id"			: 2,
-			"timestamp"		: "",
+			"timestamp"		: 1581640781160,
 			"category"		: 1,
-			"title"			: "Linear and Geometric Algebra",
-			"description"	: "This textbook for the first undergraduate linear algebra course presents a unified treatment of linear algebra and geometric algebra, while covering most of the usual linear algebra topics.Geometric algebra is an extension of linear algebra. It enhances the treatment of many linear algebra topics. And geometric algebra does much more.\r\nGeometric algebra and its extension to geometric calculus unify, simplify, and generalize vast areas of mathematics that involve geometric ideas. They provide a unified mathematical language for many areas of physics, computer science, and other fields.\r\n\r\nThe book can be used for self study by those comfortable with the theorem/proof style of a mathematics text. This is a fifth printing, corrected and slightly revised.",
-			"author"		: "Alan Macdonald",
-			"isbn"			: "1453854932",
-			"photo"			: "https://covers.openlibrary.org/b/id/9261425.jpg",
+			"title"			: "Fullstack React: The Complete Guide to ReactJS and Friends",
+			"description"	: "",
+			"author"		: "Accomazzo Anthony",
+			"isbn"			: "9781785289644",
+			"photo"			: "https://covers.openlibrary.org/w/id/8508281.jpg",
 			"deleted"		: 0,
 
 		},
 		{
 			"id"			: 3,
-			"timestamp"		: "",
+			"timestamp"		: 1581634369874,
 			"category"		: 1,
-			"title"			: "Linear and Geometric Algebra",
+			"title"			: "ReactJS by Example - Building Modern Web Applications with React",
 			"description"	: "This textbook for the first undergraduate linear algebra course presents a unified treatment of linear algebra and geometric algebra, while covering most of the usual linear algebra topics.Geometric algebra is an extension of linear algebra. It enhances the treatment of many linear algebra topics. And geometric algebra does much more.\r\nGeometric algebra and its extension to geometric calculus unify, simplify, and generalize vast areas of mathematics that involve geometric ideas. They provide a unified mathematical language for many areas of physics, computer science, and other fields.\r\n\r\nThe book can be used for self study by those comfortable with the theorem/proof style of a mathematics text. This is a fifth printing, corrected and slightly revised.",
-			"author"		: "Alan Macdonald",
-			"isbn"			: "1453854932",
-			"photo"			: "https://covers.openlibrary.org/b/id/9261425.jpg",
+			"author"		: "Vipul A M",
+			"isbn"			: "9781785289644",
+			"photo"			: "https://covers.openlibrary.org/b/id/8513006.jpg",
 			"deleted"		: 0,
 
 		},

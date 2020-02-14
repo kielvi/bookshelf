@@ -8,7 +8,7 @@
 	@extend %flex;
 
 	&_title {
-		flex: 1 0;
+		flex: 1 0 70%;
 		margin-bottom: (20/1080) * 100vh;
 		font: {
 			size: 18px;
@@ -166,7 +166,7 @@
 
 		// DESKTOP
 		@media(min-width: 1200px) {
-			flex: 1 0 30%;
+			flex: 0 0 30%;
 			justify-content: center;
 		}
 
