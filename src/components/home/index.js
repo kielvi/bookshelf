@@ -11,7 +11,7 @@ const Home = () => {
 					api.categories
 						.asArray
 						.filter((item)=> item.booksCount)
-						.map((category, i) => {     
+						.map((category, i) => {
 							return (<Category key={i} category={category} />) 
 					})
 				}
