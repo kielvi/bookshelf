@@ -27,6 +27,14 @@
 			border-color: #c1c5ce;
 		}
 	}
+	&.-basic {
+		background: #a9a9a9;
+		color: #FFF;
+
+		&:hover {
+			background-color: #878787;
+		}
+	}
 	&.-green {
 		background-color: rgba(#007a63, .9);
 		color: #FFF;

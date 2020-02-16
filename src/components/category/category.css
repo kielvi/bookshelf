@@ -1,4 +1,4 @@
-.category, .category_title, .category_items {
+.category, .category_title, .category_items, .category_separator {
   display: flex;
   flex-flow: wrap; }
 
@@ -42,3 +42,16 @@
         margin: 0 0.78125vw; } }
   .category_items {
     flex: 0 0 100%; }
+  .category_separator {
+    flex: 1 0 100%;
+    position: relative; }
+    .category_separator:before {
+      content: "";
+      width: calc(100% - (30/1920) * 100vw);
+      height: 2px;
+      margin: 0 0.78125vw;
+      position: absolute;
+      top: 18px;
+      left: 0;
+      background: #FFF;
+      display: block; }

@@ -69,4 +69,23 @@
 		@extend %flex;
 		flex: 0 0 100%;
 	}
+
+	&_separator {
+		@extend %flex;
+		flex: 1 0 100%;
+		position: relative;
+
+		&:before {
+			content: "";
+			width: calc(100% - (30/1920) * 100vw);
+			height: 2px;
+			margin: 0 (15/1920) * 100vw;
+			position: absolute;
+			top: 18px;
+			left: 0;
+			background: #FFF;
+			display: block;
+
+		}
+	}
 }

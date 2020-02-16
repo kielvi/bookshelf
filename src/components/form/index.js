@@ -16,7 +16,7 @@ class Form extends React.Component {
 			title 		: '',
 			author 		: '',
 			description : '',
-			deleted		: false,
+			deleted		: 0,
 			photoLoading: ''
 		};
 
@@ -104,7 +104,7 @@ class Form extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.setState)
+
 		let book = api.booksAPI.save(this.state);
 
 		document.location.href="/book/"+book.id;

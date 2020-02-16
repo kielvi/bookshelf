@@ -181,7 +181,7 @@
       flex: 1 0 auto;
       max-width: 9.0625vw;
       min-width: 174px;
-      height: 23.14815vh;
+      /*height: (250/1080) * 100vh;*/
       margin-right: 30px; } }
   @media (min-width: 992px) {
     .book_photo {

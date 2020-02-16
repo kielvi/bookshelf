@@ -96,7 +96,7 @@ const booksAPI = {
 			"photo"			: "https://covers.openlibrary.org/b/id/8749306.jpg",
 			"deleted"		: 0,
 
-		},
+		},/*
 		{
 			"id"			: 2,
 			"timestamp"		: 1581640781160,
@@ -120,7 +120,7 @@ const booksAPI = {
 			"photo"			: "https://covers.openlibrary.org/b/id/8513006.jpg",
 			"deleted"		: 0,
 
-		},
+		},*/
 	],
 
 	set books(books){
@@ -158,6 +158,7 @@ const booksAPI = {
 		return new Book(book);
 	},
 
+
 	all: function() { return this.books },
 	get: function(id) {
 		const isBook = p => p.id == id;
@@ -165,6 +166,10 @@ const booksAPI = {
 	}
 }
 
+const orderOptions = [
+	{ value: 'Az', label: 'A-z | Alphabetical' },
+	{ value: 'Za', label: 'Z-A | Alphabetical' },
+	{ value: 'Date', label: 'Creation date' },
+];
 
-
-export default { categories, booksAPI };
+export default { categories, booksAPI, orderOptions };

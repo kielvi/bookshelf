@@ -6,15 +6,15 @@ import api from '../../api';
 const Home = () => {
 
 	return (
-		<div className="container home">
-				{
-					api.categories
-						.asArray
-						.filter((item)=> item.booksCount)
-						.map((category, i) => {
-							return (<Category key={i} category={category} />) 
-					})
-				}
+		<div>
+			{
+				api.categories
+					.asArray
+					.filter((item)=> item.booksCount)
+					.map((category, i) => {
+						return (<Category key={i} category={category} />) 
+				})
+			}
 		</div>
 	)
 }
