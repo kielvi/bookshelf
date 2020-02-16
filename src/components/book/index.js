@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import update from 'immutability-helper';
 import Notiflix from "notiflix-react";
 import "notiflix-react/dist/notiflix-react-1.4.0.css";
-
 import Breadcrumbs from '../breadcrumbs/';
 import Comments from '../comments/';
 import api from '../../api'
@@ -29,36 +28,39 @@ class Book extends React.Component {
 			okButtonBackground:'#d5483d',
 			okButtonColor:'#f9f9fc',
 		})
+
+
 	}
 
 	deleteBook(event) {
 		event.preventDefault();
+  
+  		let self = this;
+  		let deleted = 0;
 
-		/*Notiflix.Confirm.Show(
+		Notiflix.Confirm.Show(
 			'Delete book',
 			'Are you sure to delete this book?',
 			'Yes',
 			'No',
 
-			function(){
-				
+			function() {
+				const newState = update(self.state, {
+					deleted: {$set: deleted},
+				});
+				self.setState(newState);
+				api.booksAPI.save(newState)
 			},
-		);*/
-  
-
-		const { book } = this.state;
-		let deleted = 1;
-		
-		const newState = update(this.state, {
-			deleted: {$set: deleted},
-		});
-		this.setState(newState);
-		api.booksAPI.save(newState)
+		);
 	}
 
 
 	render() {
 		const book = this.state
+		const itemActive = book.title;
+		const category = book.category;
+		const dateToFormat = '2020-02-10T20:02-0500';
+		const totalComments = book.comments.length;
 
 		return (
 		<div className="container book">
@@ -69,10 +71,11 @@ class Book extends React.Component {
 
 			<div className="portlet">
 				<div className="portlet_content">
-					
+					<div className="book_photo" style={{backgroundImage: "url("+book.photo+")"}}> </div>
 
 					<div className="book_content">
-						<div className="book_title">{book.title} - {book.deleted}</div>
+
+						<div className="book_title">{book.title}</div>
 
 						<div className="book_buttons">
 							{book.deleted ?
@@ -82,6 +85,19 @@ class Book extends React.Component {
 							}
 							
 							<Link to={`/book/${book.id}/edit`} className="button -sm -basic -icon -edit">Edit book</Link>
+						</div>
+
+						{book.description ? <div className="book_description">{book.description}</div> : null}
+
+						<div className="book_info">
+							<div className="book_info-item">
+								<div className="book_info-title">Creation date</div>
+								<div className="book_info-label -blue"><Moment format="D MMM YYYY, h:mm:ss a">{dateToFormat}</Moment></div>
+							</div>
+							<div className="book_info-item">
+								<div className="book_info-title">Category</div>
+								<Link to={`/books/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
+							</div>
 						</div>
 					</div>
 				</div>

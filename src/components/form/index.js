@@ -1,5 +1,8 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import Notiflix from "notiflix-react";
+import "notiflix-react/dist/notiflix-react-1.4.0.css";
+
 import Breadcrumbs from '../breadcrumbs/'
 import api from '../../api';
 
@@ -75,6 +78,8 @@ class Form extends React.Component {
 			'description'	: "Loading data",
 			'photoLoading'	: " -loading"
 		});
+
+		
 
 		fetch(`${library_base}${library_search}${isbn}${library_type}`)
 			.then((response) => response.json())
