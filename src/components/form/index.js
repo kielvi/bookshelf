@@ -1,5 +1,6 @@
 import React from 'react';
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import update from 'immutability-helper';
 import Notiflix from "notiflix-react";
 import "notiflix-react/dist/notiflix-react-1.4.0.css";
 
@@ -20,7 +21,8 @@ class Form extends React.Component {
 			author 		: '',
 			description : '',
 			deleted		: 0,
-			photoLoading: ''
+			photoLoading: '',
+			redirect	: false
 		};
 
 		if(props.match.params.id)
@@ -34,7 +36,6 @@ class Form extends React.Component {
 		this.handleSubmit		= this.handleSubmit.bind(this);
 	}
 
-
 	setSearchISBN(result, isbn) {
 		if(result.error) { 
 			this.photoLoading = "";
@@ -45,6 +46,13 @@ class Form extends React.Component {
 				'photo'			: "",
 				'photoLoading'	: ""
 			});
+
+			Notiflix.Report.Failure(
+				'Book not found',
+				'"This ISSBN book not found, insert a new ISBN number',
+				'Close'
+			);	
+			Notiflix.Loading.Remove();
 			return console.error(result.error);
 		}
 
@@ -54,14 +62,14 @@ class Form extends React.Component {
 		let description  = book.description;
 		let photo 		 = "https://covers.openlibrary.org/b/id/"+book.covers[0]+".jpg";
 
-
 		this.setState({
 			'title'			: (title ? title : ''),
 			'author'		: (author ? author : ''),
 			'description'	: (description ? description : ''),
 			'photo'			: (photo ? photo : ''),
-			'photoLoading'	: false
+			'photoLoading'	: false,
 		});
+		Notiflix.Loading.Remove();
 	}
 
 	onSearchChange(event) {
@@ -71,15 +79,13 @@ class Form extends React.Component {
 		const library_search = '?bibkeys=ISBN:';
 		const library_type	 = '&jscmd=details&format=json';
 
-
+		Notiflix.Loading.Pulse('Searching book ...');
 		this.setState({
 			'title'			: "Loading data",
 			'author'		: "Loading data",
 			'description'	: "Loading data",
 			'photoLoading'	: " -loading"
 		});
-
-		
 
 		fetch(`${library_base}${library_search}${isbn}${library_type}`)
 			.then((response) => response.json())
@@ -109,15 +115,37 @@ class Form extends React.Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
+		
+		let self = this;
 
-		let book = api.booksAPI.save(this.state);
+		Notiflix.Report.Init({
+			messageFontSize:"15px",
+			titleFontSize:"22px",
+			success: {svgColor:"#3cd08c",}
+		});
+		Notiflix.Report.Success(
+			'Success!',
+			'Book successfully registered',
+			'Okay',
 
-		document.location.href="/book/"+book.id;
+			function() {
+				const newState = update(self.state, {
+					redirect: {$set: true},
+				});
+				self.setState(newState);
+				api.booksAPI.save(newState);
+			}
+		);
 	}
 
 	render() {
 		const { photo } = this.state;
 		const { photoLoading } = this.state;
+		const { redirect } = this.state;
+
+		if (redirect) {
+			return <Redirect push to='/' />;
+		}
 
 		return (
 			<div className="container">

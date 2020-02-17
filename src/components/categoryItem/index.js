@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import api from '../../api';
 import './categoryItem.css'
 
 const CategoryItem = (props) => {
-	console.log(props.item)
-	let book = props.item;
+	/*api.booksAPI.get(this.props.match.params.id)*/
+	const book = api.booksAPI.get(props.item.id);
+
 	let limit = 100;
 	let photo = props.item.photo;
 	let description = props.item.description;

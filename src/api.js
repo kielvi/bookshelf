@@ -85,7 +85,7 @@ const categories = {
 
 const booksAPI = {
 	_books: [
-		{
+		/*{
 			"id"			: 1,
 			"timestamp"		: 1581634369874,
 			"category"		: 1,
@@ -96,7 +96,7 @@ const booksAPI = {
 			"photo"			: "https://covers.openlibrary.org/b/id/8749306.jpg",
 			"deleted"		: 0,
 
-		},/*
+		},
 		{
 			"id"			: 2,
 			"timestamp"		: 1581640781160,
@@ -139,6 +139,11 @@ const booksAPI = {
 	get comments(){
 		let comment = JSON.parse( localStorage.getItem('comment') || false );
 		return comment || {};
+	},
+
+	get commentsCount(){
+		let comment = JSON.parse( localStorage.getItem('comment') || false );
+		return comment.length;
 	},
 
 	byCategory: function(category){

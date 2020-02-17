@@ -10,6 +10,7 @@ class Category extends React.Component {
 	constructor(props) {
 		super(props);
 		const { category } = this.props;
+
 		this.state = {
 			order: null,
 			books: api.booksAPI.byCategory(category.id)
@@ -86,7 +87,7 @@ class Category extends React.Component {
 						<div className="category_items">
 							{
 								books
-									
+									.filter(item => item.deleted==0)
 									.map((book, i) => {     
 									return (<CategoryItem key={i} item={book} />) 
 								})
