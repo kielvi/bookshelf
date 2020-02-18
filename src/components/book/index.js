@@ -62,6 +62,7 @@ class Book extends React.Component {
 		const category = book.category;
 		const description = book.description
 		const totalComments = (book.comments ? book.comments.length : '');
+		const allCategories = api.categories.asArray.splice(1);
 		const { redirect } = this.state;
 
 		return (
@@ -102,7 +103,24 @@ class Book extends React.Component {
 								</div>
 								<div className="book_info-item">
 									<div className="book_info-title">Category</div>
-									<Link to={`/books/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
+									<Link to={`/books/categories/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
+									<div className="book_menu">
+										<div className="book_menu-burguer"></div>
+										<div className="book_menu-content">
+											{
+												allCategories
+													.sort((a,b) => a.name.localeCompare(b.name))
+													.map((category, i) => {
+													return (
+														<div className="book_menu-link">
+															<div className={`book_menu-icon -${category.class}`}></div>
+															{category.name}
+														</div>
+													) 
+												})
+											}
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -139,7 +157,7 @@ class Book extends React.Component {
 							<div className="book_label">
 								<i className="book_label-icon -author"></i>
 								<div className="book_label-content">
-									<div className="book_label-title">Create date</div>
+									<div className="book_label-title">Create in</div>
 									<div className="book_label-text"><Moment fromNow>{book.timestamp}</Moment></div>
 								</div>
 							</div>
