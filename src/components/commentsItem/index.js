@@ -65,6 +65,8 @@ class Comment extends React.Component {
 				});
 				self.props.book.saveComment(newState)
 				self.setState(newState);
+
+				if( self.props.onEdit ) self.props.onEdit();
 			}
 		);
 	}
@@ -99,7 +101,7 @@ class Comment extends React.Component {
 	render() {
 		const { editing, body } = this.state;
 		const { data } = this.props;
-		console.log(this.props.data)
+
 		return (
 			<div className="comment">
 				<i className="comment_icon"></i>

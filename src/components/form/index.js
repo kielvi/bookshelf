@@ -49,7 +49,7 @@ class Form extends React.Component {
 				'Book not found',
 				'"This ISSBN book not found, insert a new ISBN number',
 				'Close'
-			);	
+			);
 			Notiflix.Loading.Remove();
 			return console.error(result.error);
 		}
