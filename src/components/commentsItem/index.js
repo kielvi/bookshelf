@@ -95,7 +95,7 @@ class Comment extends React.Component {
 	}
 
 	render() {
-		const { editing } = this.state;
+		const { editing, body } = this.state;
 		const { data } = this.props;
 		
 		return (

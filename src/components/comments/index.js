@@ -61,12 +61,6 @@ class Comments extends React.Component {
 					author 		: {$set: 'Me'}
 				});
 				self.setState(newState);
-				/*self.props.book.saveComment(self.state)
-
-				const newState = update(self.state, {
-					commented	: {$set: true},
-				});
-				self.setState(newState);*/
 			}
 		);
 	}
@@ -77,7 +71,7 @@ class Comments extends React.Component {
 		return (
 			<div className="portlet -w100">
 				<div className="portlet_head">
-					Comments - {Date.now()}
+					Comments
 				</div>
 
 				<div className="portlet_content">
@@ -113,80 +107,5 @@ class Comments extends React.Component {
 		)
 	}
 }
-				/*<div className="portlet_head">
-					Comments
-				</div>
-
-				<div className="portlet_content">
-					<form className="form" onSubmit={this.handleSubmit}>
-						<div className="form_group -w100">
-							<textarea name="body" value={this.state.body} onChange={this.handleInputChange} placeholder="Write your comment" className="form_input -textarea" required></textarea>
-							<span className="form_validation">Error or just validation</span>
-						</div>
-						<div className="form_group -w100">
-							<button className="button -submit -mr_20">Add comment</button>
-						</div>
-						<div className="form_separator"></div>
-					</form>
-
-
-					<div className="comments_items">
-						{commentsCount ?
-							comments
-								.sort((a,b) => b.timestamp - a.timestamp)
-								.map((item, key) => {
-									return (
-										<Comment key={key} data={item} />
-									)
-								})
-							:
-							<div className="alert">No comments found</div>
-						}
-					</div>
-				</div>*/
-
-/*
-				<div className="portlet_content">
-
-					<form className="form" onSubmit={this.handleSubmit}>
-						<div className="form_group -w100">
-							<textarea name="body" value={this.state.body} onChange={this.handleInputChange} placeholder="Write your comment" className="form_input -textarea" required></textarea>
-							<span className="form_validation">Error or just validation</span>
-						</div>
-						<div className="form_group -w100">
-							<button className="button -submit -mr_20">Add comment</button>
-						</div>
-						<div className="form_separator"></div>
-					</form>
-
-					<div className="comments_items">
-						{hasComments ?
-							comments
-								.sort((a,b) => b.timestamp - a.timestamp)
-								.map((item, key) => {
-									return (
-										<Comment key={key} book={book} data={item} />
-									)
-								})
-							:
-							<div className="alert">No comments found</div>
-						}
-					</div>
-				</div>
- */
+				
 export default Comments;
-
-/*
-						{hasComments ?
-								data.book.comments
-									.sort((a,b) => b.timestamp - a.timestamp)
-									.map((item, key) => {     
-									return (
-										<Comment key={key} book={data.book} data={item} />
-									) 
-								})
-							:
-							<div>Nao ha book</div>
-						}
-
- */
