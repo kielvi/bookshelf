@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Roboto:300,400,500,600,700');
+
+
+body {
+	margin: 0;
+	background: #f9f9fc;
+	font-size: 13px;
+	font-weight: 300;
+	color: #646c9a;
+	font-family: Poppins,Helvetica,sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@import "components/reset";
+@import "components/placeholders";
+@import "components/form";
+@import "components/headings";
+@import "components/buttons";
+@import "components/portlets";
+
+
+.App {
+	@extend %flex;
+}
+
+.container {
+	@extend %flex;
+	flex: 1 0;
+	padding: (20/1080) * 100vh (40/1920) * 100vw;
+	justify: {
+		content: center;
+		items: flex-start;
+	}
+	align: {
+		content: flex-start;
+		items: flex-start;
+	}
+
+	// TABLET
+	@media(min-width: 748px) {
+		margin-left: (120/1920) * 100vw;
+	}
+}
+
+
+.alert {
+	@extend %flex;
+	flex: 1 0;
+	margin: 15px 0;
+	padding: 20px;
+	background: #FFF;
+	box-shadow: 0 0 13px rgba(#000, .1);
+	border-radius: 4px;
+	justify-content: center;
+	strong { padding: 0 5px; }
+
+	// DESKTOP
+	@media(min-width: 992px) {
+		margin: (30/1080) * 100vh 0;
+		padding: (40/1080) * 100vh (20/1920) * 100vw;
+		font-size: 16px;
+
+	}
+}

@@ -1,0 +1,9 @@
+.comments_items {
+  display: flex;
+  flex-flow: wrap; }
+
+.comments_items {
+  flex: 1 0; }
+  @media (min-width: 992px) {
+    .comments_items {
+      margin: 0 0.625vw; } }

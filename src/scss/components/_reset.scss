@@ -1,0 +1,44 @@
+*, *::after, *::before { padding:0; margin:0; text-decoration:none; -webkit-box-sizing:border-box; box-sizing:border-box; outline:none; }
+::-moz-selection { color:#FFF; background:#ef0123; }
+::selection { color:#FFF; background:#ef0123; }
+
+button { 
+	cursor: pointer!important;
+	transition: background 300ms ease-in, border 300ms ease-in, color 300ms ease-in;
+
+	&:focus { 
+		cursor: pointer;
+		outline:none; 
+		transition: background 300ms ease-out, border 300ms ease-out, color 300ms ease-out;
+	} 
+}
+a {
+	cursor: pointer;
+	transition: background 300ms ease-in, color 300ms ease-in;
+
+	&:hover, &:focus {
+		text-decoration: none!important;
+		transition: background 300ms ease-out, color 300ms ease-out;
+	}
+}
+
+i {
+	transition: color 300ms ease-in;
+}
+
+p {
+	margin: 0;
+}
+
+input, select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.breadcrumb {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	background-color: transparent;
+	border-radius: 0;
+}

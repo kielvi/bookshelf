@@ -1,0 +1,15 @@
+// PLACEHOLDERS
+%flex {
+	display: flex;
+	flex-flow: wrap;
+}
+
+.comments_items {
+	flex: 1 0;
+	@extend %flex;
+
+	// DESKTOP
+	@media(min-width: 992px) {
+		margin: 0 (12/1920) * 100vw;
+	}
+}
