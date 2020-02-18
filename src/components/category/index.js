@@ -87,7 +87,6 @@ class Category extends React.Component {
 						<div className="category_items">
 							{
 								books
-									.filter(item => item.deleted==0)
 									.map((book, i) => {     
 									return (<CategoryItem key={i} item={book} />) 
 								})

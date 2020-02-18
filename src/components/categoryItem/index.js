@@ -4,7 +4,6 @@ import api from '../../api';
 import './categoryItem.css'
 
 const CategoryItem = (props) => {
-	/*api.booksAPI.get(this.props.match.params.id)*/
 	const book = api.booksAPI.get(props.item.id);
 
 	let limit = 100;
@@ -16,7 +15,7 @@ const CategoryItem = (props) => {
 			<Link to={`/book/${book.id}`} className="item_container">
 				<div className={`item_photo `+(!photo ? "-no_photo":'')} style={ photo ? { backgroundImage:`url(${photo})`, backgroundSize:`cover` } : '' }></div>
 				<div className="item_content">
-					<div className="item_title">{book.title} - {book.deleted}</div>
+					<div className="item_title">{book.title}</div>
 					<div className="item_author">{book.author}</div>
 					<div className={`item_category -${book.category_class}`}>{book.category_name}</div>
 
@@ -26,7 +25,9 @@ const CategoryItem = (props) => {
 								{`${description.substring(0, limit)}...`}
 							</div>
 						) :
-							false
+							<div className="item_description">
+								{description}
+							</div>
 					}
 				</div>
 			</Link>

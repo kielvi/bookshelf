@@ -10,7 +10,7 @@ const Navbar = (props) => {
 	return (
 		<div className="navbar -justify_center">
 			<Link to='/' className="navbar_logo"></Link>
-
+{Date.now()}
 			<ul className="navbar_menu">
 				<li className="navbar_menu-item">
 					<Link to='/' className="navbar_menu-link">

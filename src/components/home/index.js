@@ -4,7 +4,6 @@ import Category from '../category/';
 import api from '../../api';
 
 const Home = () => {
-
 	return (
 		<div>
 			{

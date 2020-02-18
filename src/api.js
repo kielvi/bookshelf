@@ -125,10 +125,11 @@ const booksAPI = {
 
 	set books(books){
 		localStorage.setItem('books', JSON.stringify(books));
-		return books
+		return books;
 	},
 	get books(){
 		let books = JSON.parse( localStorage.getItem('books') || false );
+		
 		return (books || this._books).map((item) => new Book(item));
 	},
 
@@ -147,6 +148,7 @@ const booksAPI = {
 	},
 
 	byCategory: function(category){
+		
 		return this.books.filter((el) => el.category == category);
 	},
 

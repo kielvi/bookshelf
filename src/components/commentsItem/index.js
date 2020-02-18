@@ -1,38 +1,139 @@
 import React from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import Notiflix from "notiflix-react";
+import "notiflix-react/dist/notiflix-react-1.4.0.css";
+import update from 'immutability-helper';
 import booksAPI from '../../api'
+import api from '../../api';
 import { Link } from 'react-router-dom';
 import './commentsItem.css';
 
+class Comment extends React.Component {
+	constructor(props) {
+		super(props);
 
-const Comment = (props) => {
-	const comment = props.data;
+		this.state = props.data;
+console.log(props.data)
+		this.handleInputChange	= this.handleInputChange.bind(this);
+		this.handleActionEdit 	= this.handleActionEdit.bind(this);
+		this.handleEditing		= this.handleEditing.bind(this);
+		this.handleDelete		= this.handleDelete.bind(this);
+	}
 
-	return (
-		<div className="comment">
-			<i className="comment_icon"></i>
-			<div className="comment_content">
-				<div className="comment_name">{comment.author}</div>
-				<div className="comment_date"><Moment fromNow>{comment.timestamp}</Moment></div>
-				<div className="comment_new">new</div>
-				<div className="comment_menu">
-					<div className="comment_menu-burguer"></div>
-					<div className="comment_menu-content">
-						<Link to="/" className="comment_menu-link">
-							<div className="comment_menu-icon -edit"></div>
-							Edit
-						</Link>
-						<Link to="/" className="comment_menu-link">
-							<div className="comment_menu-icon -delete"></div>
-							Delete
-						</Link>
+	handleActionEdit(event) {
+		this.setState({
+			editing: true
+		})
+	}
+
+	handleInputChange(event) {
+		let target = event.target;
+		let value = target.value;
+		let name = target.name;
+
+		this.setState({
+			[name]: value
+		});
+
+	}
+
+	handleEditing(event) {
+		event.preventDefault();
+		if (!event.target.checkValidity()) {
+			return;
+		}
+
+		let self = this;
+
+		Notiflix.Report.Init({
+			messageFontSize:"15px",
+			titleFontSize:"22px",
+			success: {svgColor:"#3cd08c",}
+		});
+		Notiflix.Report.Success(
+			'Success!',
+			'Comment successfully edited',
+			'Okay',
+
+			function() {
+				const newState = update(self.state, {
+					editing	: {$set: false},
+				});
+				api.booksAPI.get(self.props.data.parentId).saveComment(newState)
+				self.setState(newState);
+			}
+		);
+	}
+
+	handleDelete(event) {
+		event.preventDefault();
+		let self = this;
+
+		Notiflix.Report.Init({
+			messageFontSize:"15px",
+			titleFontSize:"22px",
+			success: {svgColor:"#3cd08c",}
+		});
+		Notiflix.Report.Success(
+			'Success!',
+			'Comment successfully registered',
+			'Okay',
+
+			function() {
+				const newState = update(self.state, {
+					deleted	: {$set: 1},
+					editing	: {$set: false},
+				});
+				api.booksAPI.get(self.props.data.parentId).saveComment(newState)
+				self.setState(newState);
+			}
+		);
+	}
+
+	render() {
+		const { editing } = this.state;
+
+
+		return (
+			<div className="comment">
+				<i className="comment_icon"></i>
+				<div className="comment_content">
+					<div className="comment_name">{this.state.author}</div>
+					<div className="comment_date"><Moment fromNow>{this.state.timestamp}</Moment></div>
+					<div className="comment_new">new</div>
+					<div className="comment_menu">
+						<div className="comment_menu-burguer"></div>
+						<div className="comment_menu-content">
+							<div className="comment_menu-link" onClick={this.handleActionEdit}>
+								<div className="comment_menu-icon -edit"></div>
+								Edit
+							</div>
+							<div className="comment_menu-link" onClick={this.handleDelete}>
+								<div className="comment_menu-icon -delete"></div>
+								Delete
+							</div>
+						</div>
+					</div>
+					<div className="comment_text">
+						{!editing ?
+							this.state.body
+							:
+							<form className="form" onSubmit={this.handleEditing}>
+								<div className="form_group -w100">
+									<textarea name="body" value={this.state.body} onChange={this.handleInputChange} className="form_input -textarea" required></textarea>
+									<span className="form_validation">Error or just validation</span>
+								</div>
+								<div className="form_group -w100">
+									<button className="button -submit -mr_20">Save</button>
+								</div>
+							</form>
+						}
 					</div>
 				</div>
-				<div className="comment_text">{comment.body}</div>
 			</div>
-		</div>
-	)
-	
+		)
+	}
 }
+
 export default Comment;

@@ -28,8 +28,6 @@ class Form extends React.Component {
 		if(props.match.params.id)
 			this.state = api.booksAPI.get(props.match.params.id)
 
-
-		/*this.history = useHistory();*/
 		this.onSearchChange		= this.onSearchChange.bind(this);
 		this.setSearchISBN		= this.setSearchISBN.bind(this);
 		this.handleInputChange	= this.handleInputChange.bind(this);
@@ -58,7 +56,7 @@ class Form extends React.Component {
 
 		const book 		 = result["ISBN:"+isbn].details;
 		let title 		 = book.title;
-		let author 		 = book.authors[0].name;
+		let author 		 = (book.authors ? book.authors[0].name : null);
 		let description  = book.description;
 		let photo 		 = "https://covers.openlibrary.org/b/id/"+book.covers[0]+".jpg";
 
@@ -134,6 +132,8 @@ class Form extends React.Component {
 				});
 				self.setState(newState);
 				api.booksAPI.save(newState);
+
+				self.props.history.push('/');
 			}
 		);
 	}
@@ -141,11 +141,6 @@ class Form extends React.Component {
 	render() {
 		const { photo } = this.state;
 		const { photoLoading } = this.state;
-		const { redirect } = this.state;
-
-		if (redirect) {
-			return <Redirect push to='/' />;
-		}
 
 		return (
 			<div className="container">

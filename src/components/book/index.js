@@ -14,9 +14,7 @@ class Book extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { ...api.booksAPI.get(this.props.match.params.id),
-			redirect: false,
-		};
+		this.state = api.booksAPI.get(this.props.match.params.id);
 
 		this.deleteBook	= this.deleteBook.bind(this);
 	}
@@ -50,13 +48,11 @@ class Book extends React.Component {
 
 			function() {
 				const newState = update(self.state, {
-					deleted: {$set: deleted},
-					redirect: {$set: true}
+					deleted: {$set: deleted}
 				});
 				
 				self.setState(newState);
 				api.booksAPI.save(self.state)
-
 			},
 		);
 	}
@@ -66,8 +62,6 @@ class Book extends React.Component {
 		const book = this.state;
 		const totalComments = (book.comments ? book.comments.length : '');
 		const { redirect } = this.state;
-		
-		if(redirect) return <Redirect push to='/' />;
 
 		return (
 			<div className="container book">
@@ -81,11 +75,10 @@ class Book extends React.Component {
 						<div className="book_photo" style={{backgroundImage: "url("+book.photo+")"}}> </div>
 
 						<div className="book_content">
-							<div className="book_title">{book.title} - {book.deleted}</div>
+							<div className="book_title">{book.title}</div>
 
 							<div className="book_buttons">
-								
-									<div onClick={this.deleteBook} className="button -sm -red -mr_5 -icon -delete">Delete book</div>
+								<div onClick={this.deleteBook} className="button -sm -red -mr_5 -icon -delete">{!book.deleted ? 'Delete book' : 'Restore book'}</div>
 								
 								
 								<Link to={`/book/${book.id}/edit`} className="button -sm -basic -icon -edit">Edit book</Link>
@@ -95,22 +88,41 @@ class Book extends React.Component {
 
 						<div className="book_separator"></div>
 
-
-						<div className="book_label">
-							<i className="book_label-icon -author"></i>
-							<div className="book_label-content">
-								<div className="book_label-title">Author</div>
-								<div className="book_label-text">{book.author}</div>
+						{book.author ? 
+							<div className="book_label">
+								<i className="book_label-icon -author"></i>
+								<div className="book_label-content">
+									<div className="book_label-title">Author</div>
+									<div className="book_label-text">{book.author}</div>
+								</div>
 							</div>
-						</div>
+							:
+							false
+						}
 
-						<div className="book_label">
-							<i className="book_label-icon -isbn"></i>
-							<div className="book_label-content">
-								<div className="book_label-title">ISBN</div>
-								<div className="book_label-text">{book.isbn}</div>
+						{book.isbn ? 
+							<div className="book_label">
+								<i className="book_label-icon -isbn"></i>
+								<div className="book_label-content">
+									<div className="book_label-title">ISBN</div>
+									<div className="book_label-text">{book.isbn}</div>
+								</div>
 							</div>
-						</div>
+							:
+							false
+						}
+
+						{book.timestamp ? 
+							<div className="book_label">
+								<i className="book_label-icon -author"></i>
+								<div className="book_label-content">
+									<div className="book_label-title">Create date</div>
+									<div className="book_label-text"><Moment fromNow>{book.timestamp}</Moment></div>
+								</div>
+							</div>
+							:
+							false
+						}
 
 						<div className="book_label">
 							<i className="book_label-icon -status"></i>

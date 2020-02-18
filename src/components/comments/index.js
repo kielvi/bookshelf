@@ -16,11 +16,12 @@ class Comments extends React.Component {
 		this.state = {
 			body 		: '',
 			author 		: 'Me',
+			commented 	: false,
 		};
 
-//booksAPI.books[""0""].__proto__.saveComment
 		this.handleInputChange	= this.handleInputChange.bind(this);
 		this.handleSubmit		= this.handleSubmit.bind(this);
+
 	}
 
 	handleInputChange(event) {
@@ -31,9 +32,7 @@ class Comments extends React.Component {
 		this.setState({
 			[name]: value
 		});
-	}
-
-	
+	}	
 
 	handleSubmit(event) {
 		event.preventDefault();
@@ -54,23 +53,58 @@ class Comments extends React.Component {
 			'Okay',
 
 			function() {
-				api.booksAPI.get(self.props.book.id).saveComment(self.state)
+				self.props.book.saveComment(self.state)
+
 				const newState = update(self.state, {
-					commented: {$set: true},
+					commented	: {$set: true},
 				});
 				self.setState(newState);
 			}
 		);
-		//this.props.book.saveComment(this.state)
 	}
 
 	render() {
-		const { comments } = api.booksAPI.get(this.props.book.id);
-		const commentsCount = api.booksAPI.get(this.props.book.id).comments.length;
-
+		const { comments } = this.props.book;
+console.log(comments)
 		return (
 			<div className="portlet -w100">
 				<div className="portlet_head">
+					Comments - {Date.now()}
+				</div>
+
+				<div className="portlet_content">
+					<form className="form" onSubmit={this.handleSubmit}>
+						<div className="form_group -w100">
+							<textarea name="body" value={this.state.body} onChange={this.handleInputChange} placeholder="Write your comment" className="form_input -textarea" required></textarea>
+							<span className="form_validation">Error or just validation</span>
+						</div>
+						<div className="form_group -w100">
+							<button className="button -submit -mr_20">Add comment</button>
+						</div>
+						<div className="form_separator"></div>
+					</form>
+					<div className="comments_items">
+						
+							{comments.length>0 ?
+								comments
+									.sort((a,b) => b.timestamp - a.timestamp)
+									.map((item, key) => {
+									return (
+										<Comment key={key} data={item} />
+									)
+								})
+							:
+								<div className="alert">No comments found</div>
+							}
+							
+						
+					</div>
+				</div>
+			</div>
+		)
+	}
+}
+				/*<div className="portlet_head">
 					Comments
 				</div>
 
@@ -100,11 +134,8 @@ class Comments extends React.Component {
 							<div className="alert">No comments found</div>
 						}
 					</div>
-				</div>
-			</div>
-		)
-	}
-}
+				</div>*/
+
 /*
 				<div className="portlet_content">
 
