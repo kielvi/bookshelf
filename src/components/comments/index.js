@@ -61,59 +61,17 @@ class Comments extends React.Component {
 					author 		: {$set: 'Me'}
 				});
 				self.setState(newState);
-				/*self.props.book.saveComment(self.state)
-
-				const newState = update(self.state, {
-					commented	: {$set: true},
-				});
-				self.setState(newState);*/
 			}
 		);
 	}
 
 	render() {
 		const { comments } = this.props.book;
+		const update = () => this.forceUpdate();
 
 		return (
 			<div className="portlet -w100">
 				<div className="portlet_head">
-					Comments - {Date.now()}
-				</div>
-
-				<div className="portlet_content">
-					<form className="form" onSubmit={this.handleSubmit}>
-						<div className="form_group -w100">
-							<textarea name="body" value={this.state.body} onChange={this.handleInputChange} placeholder="Write your comment" className="form_input -textarea" required></textarea>
-							<span className="form_validation">Error or just validation</span>
-						</div>
-						<div className="form_group -w100">
-							<button className="button -submit -mr_20">Add comment</button>
-						</div>
-						<div className="form_separator"></div>
-					</form>
-					<div className="comments_items">
-						
-							{comments.length>0 ?
-								comments
-									.sort((a,b) => b.timestamp - a.timestamp)
-									.filter((item)=> !item.deleted)
-									.map((item, key) => {
-									return (
-										<Comment key={key} book={this.props.book} data={item} />
-									)
-								})
-							:
-								<div className="alert">No comments found</div>
-							}
-							
-						
-					</div>
-				</div>
-			</div>
-		)
-	}
-}
-				/*<div className="portlet_head">
 					Comments
 				</div>
 
@@ -128,65 +86,27 @@ class Comments extends React.Component {
 						</div>
 						<div className="form_separator"></div>
 					</form>
-
-
 					<div className="comments_items">
-						{commentsCount ?
-							comments
-								.sort((a,b) => b.timestamp - a.timestamp)
-								.map((item, key) => {
+						
+							{!comments ?
+								<div className="alert">No comments found</div>
+							:
+								comments
+									.sort((a,b) => b.timestamp - a.timestamp)
+									.filter((item)=> !item.deleted)
+									.map((item, key) => {
 									return (
-										<Comment key={key} data={item} />
+										<Comment key={key} book={this.props.book} data={item} onDelete={ update } />
 									)
 								})
-							:
-							<div className="alert">No comments found</div>
-						}
-					</div>
-				</div>*/
-
-/*
-				<div className="portlet_content">
-
-					<form className="form" onSubmit={this.handleSubmit}>
-						<div className="form_group -w100">
-							<textarea name="body" value={this.state.body} onChange={this.handleInputChange} placeholder="Write your comment" className="form_input -textarea" required></textarea>
-							<span className="form_validation">Error or just validation</span>
-						</div>
-						<div className="form_group -w100">
-							<button className="button -submit -mr_20">Add comment</button>
-						</div>
-						<div className="form_separator"></div>
-					</form>
-
-					<div className="comments_items">
-						{hasComments ?
-							comments
-								.sort((a,b) => b.timestamp - a.timestamp)
-								.map((item, key) => {
-									return (
-										<Comment key={key} book={book} data={item} />
-									)
-								})
-							:
-							<div className="alert">No comments found</div>
-						}
+							}
+							
+						
 					</div>
 				</div>
- */
+			</div>
+		)
+	}
+}
+				
 export default Comments;
-
-/*
-						{hasComments ?
-								data.book.comments
-									.sort((a,b) => b.timestamp - a.timestamp)
-									.map((item, key) => {     
-									return (
-										<Comment key={key} book={data.book} data={item} />
-									) 
-								})
-							:
-							<div>Nao ha book</div>
-						}
-
- */

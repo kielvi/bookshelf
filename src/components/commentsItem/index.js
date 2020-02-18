@@ -90,14 +90,16 @@ class Comment extends React.Component {
 				});
 				self.props.book.saveComment(newState)
 				self.setState(newState);
+
+				if( self.props.onDelete ) self.props.onDelete();
 			}
 		);
 	}
 
 	render() {
-		const { editing } = this.state;
+		const { editing, body } = this.state;
 		const { data } = this.props;
-		
+		console.log(this.props.data)
 		return (
 			<div className="comment">
 				<i className="comment_icon"></i>
@@ -140,42 +142,3 @@ class Comment extends React.Component {
 }
 
 export default Comment;
-
-/*
-			<div className="comment">
-				<i className="comment_icon"></i>
-				<div className="comment_content">
-					<div className="comment_name">{Date.now()+" | "+data.author}</div>
-					<div className="comment_date"><Moment fromNow>{data.timestamp}</Moment></div>
-					<div className="comment_new">new</div>
-					<div className="comment_menu">
-						<div className="comment_menu-burguer"></div>
-						<div className="comment_menu-content">
-							<div className="comment_menu-link" onClick={this.handleActionEdit}>
-								<div className="comment_menu-icon -edit"></div>
-								Edit
-							</div>
-							<div className="comment_menu-link" onClick={this.handleDelete}>
-								<div className="comment_menu-icon -delete"></div>
-								Delete
-							</div>
-						</div>
-					</div>
-					<div className="comment_text">
-						{!editing ?
-							data.body
-							:
-							<form className="form" onSubmit={this.handleEditing}>
-								<div className="form_group -w100">
-									<textarea name="body" value={this.state.body} onChange={this.handleInputChange} className="form_input -textarea" required></textarea>
-									<span className="form_validation">Error or just validation</span>
-								</div>
-								<div className="form_group -w100">
-									<button className="button -submit -mr_20">Save</button>
-								</div>
-							</form>
-						}
-					</div>
-				</div>
-			</div>
- */

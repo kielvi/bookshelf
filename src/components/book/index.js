@@ -57,8 +57,12 @@ class Book extends React.Component {
 
 
 	render() {
+		let limit = 1200;
 		const book = this.state;
+		const category = book.category;
+		const description = book.description
 		const totalComments = (book.comments ? book.comments.length : '');
+		const allCategories = api.categories.asArray.splice(1);
 		const { redirect } = this.state;
 
 		return (
@@ -77,11 +81,50 @@ class Book extends React.Component {
 
 							<div className="book_buttons">
 								<div onClick={this.deleteBook} className="button -sm -red -mr_5 -icon -delete">{!book.deleted ? 'Delete book' : 'Restore book'}</div>
-								
-								
 								<Link to={`/book/${book.id}/edit`} className="button -sm -basic -icon -edit">Edit book</Link>
 							</div>
+
+							{description.length > limit ?
+								(
+									<div className="book_description">
+										{`${description.substring(0, limit)}...`}
+									</div>
+								) :
+									<div className="book_description">
+										{description}
+									</div>
+							}
+
+
+							<div className="book_info">
+								<div className="book_info-item">
+									<div className="book_info-title">Creation date</div>
+									<div className="book_info-label -blue"><Moment format="D MMM YYYY, h:mm:ss a">{book.timestamp}</Moment></div>
+								</div>
+								<div className="book_info-item">
+									<div className="book_info-title">Category</div>
+									<Link to={`/books/categories/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
+									<div className="book_menu">
+										<div className="book_menu-burguer"></div>
+										<div className="book_menu-content">
+											{
+												allCategories
+													.sort((a,b) => a.name.localeCompare(b.name))
+													.map((category, i) => {
+													return (
+														<div className="book_menu-link">
+															<div className={`book_menu-icon -${category.class}`}></div>
+															{category.name}
+														</div>
+													) 
+												})
+											}
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
+
 
 
 						<div className="book_separator"></div>
@@ -114,7 +157,7 @@ class Book extends React.Component {
 							<div className="book_label">
 								<i className="book_label-icon -author"></i>
 								<div className="book_label-content">
-									<div className="book_label-title">Create date</div>
+									<div className="book_label-title">Create in</div>
 									<div className="book_label-text"><Moment fromNow>{book.timestamp}</Moment></div>
 								</div>
 							</div>
@@ -134,7 +177,7 @@ class Book extends React.Component {
 							<i className="book_label-icon -comments"></i>
 							<div className="book_label-content">
 								<div className="book_label-title">Comments</div>
-								<div className="book_label-text">{totalComments >0 ? totalComments+" comment(s)" : "No comments yet" }</div>
+								<div className="book_label-text">{totalComments>0 ? totalComments+" comment(s)" : "No comments yet" }</div>
 							</div>
 						</div>
 					</div>
