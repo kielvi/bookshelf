@@ -57,7 +57,10 @@ class Book extends React.Component {
 
 
 	render() {
+		let limit = 1200;
 		const book = this.state;
+		const category = book.category;
+		const description = book.description
 		const totalComments = (book.comments ? book.comments.length : '');
 		const { redirect } = this.state;
 
@@ -77,11 +80,33 @@ class Book extends React.Component {
 
 							<div className="book_buttons">
 								<div onClick={this.deleteBook} className="button -sm -red -mr_5 -icon -delete">{!book.deleted ? 'Delete book' : 'Restore book'}</div>
-								
-								
 								<Link to={`/book/${book.id}/edit`} className="button -sm -basic -icon -edit">Edit book</Link>
 							</div>
+
+							{description.length > limit ?
+								(
+									<div className="book_description">
+										{`${description.substring(0, limit)}...`}
+									</div>
+								) :
+									<div className="book_description">
+										{description}
+									</div>
+							}
+
+
+							<div className="book_info">
+								<div className="book_info-item">
+									<div className="book_info-title">Creation date</div>
+									<div className="book_info-label -blue"><Moment format="D MMM YYYY, h:mm:ss a">{book.timestamp}</Moment></div>
+								</div>
+								<div className="book_info-item">
+									<div className="book_info-title">Category</div>
+									<Link to={`/books/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
+								</div>
+							</div>
 						</div>
+
 
 
 						<div className="book_separator"></div>

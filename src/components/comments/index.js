@@ -67,6 +67,7 @@ class Comments extends React.Component {
 
 	render() {
 		const { comments } = this.props.book;
+		const update = () => this.forceUpdate();
 
 		return (
 			<div className="portlet -w100">
@@ -93,7 +94,7 @@ class Comments extends React.Component {
 									.filter((item)=> !item.deleted)
 									.map((item, key) => {
 									return (
-										<Comment key={key} book={this.props.book} data={item} />
+										<Comment key={key} book={this.props.book} data={item} onDelete={ update } />
 									)
 								})
 							:
