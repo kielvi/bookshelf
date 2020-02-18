@@ -159,7 +159,7 @@ class Book extends React.Component {
 							<i className="book_label-icon -comments"></i>
 							<div className="book_label-content">
 								<div className="book_label-title">Comments</div>
-								<div className="book_label-text">{totalComments >0 ? totalComments+" comment(s)" : "No comments yet" }</div>
+								<div className="book_label-text">{totalComments>0 ? totalComments+" comment(s)" : "No comments yet" }</div>
 							</div>
 						</div>
 					</div>

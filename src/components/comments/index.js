@@ -88,7 +88,9 @@ class Comments extends React.Component {
 					</form>
 					<div className="comments_items">
 						
-							{comments.length>0 ?
+							{!comments ?
+								<div className="alert">No comments found</div>
+							:
 								comments
 									.sort((a,b) => b.timestamp - a.timestamp)
 									.filter((item)=> !item.deleted)
@@ -97,8 +99,6 @@ class Comments extends React.Component {
 										<Comment key={key} book={this.props.book} data={item} onDelete={ update } />
 									)
 								})
-							:
-								<div className="alert">No comments found</div>
 							}
 							
 						
