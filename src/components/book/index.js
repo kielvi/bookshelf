@@ -30,8 +30,6 @@ class Book extends React.Component {
 			okButtonBackground:'#d5483d',
 			okButtonColor:'#f9f9fc',
 		})
-
-
 	}
 
 	deleteBook(event) {

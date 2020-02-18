@@ -85,7 +85,7 @@ const categories = {
 
 const booksAPI = {
 	_books: [
-		/*{
+		{
 			"id"			: 1,
 			"timestamp"		: 1581634369874,
 			"category"		: 1,
@@ -120,7 +120,7 @@ const booksAPI = {
 			"photo"			: "https://covers.openlibrary.org/b/id/8513006.jpg",
 			"deleted"		: 0,
 
-		},*/
+		},
 	],
 
 	set books(books){

@@ -14,14 +14,13 @@ class Comments extends React.Component {
 		super(props);
 
 		this.state = {
+			id 			: '',
 			body 		: '',
 			author 		: 'Me',
-			commented 	: false,
 		};
 
 		this.handleInputChange	= this.handleInputChange.bind(this);
 		this.handleSubmit		= this.handleSubmit.bind(this);
-
 	}
 
 	handleInputChange(event) {
@@ -53,19 +52,27 @@ class Comments extends React.Component {
 			'Okay',
 
 			function() {
+
 				self.props.book.saveComment(self.state)
+				const newState = update(self.state, {
+					id 		: {$set: ''},
+					body 		: {$set: ''},
+					author 		: {$set: 'Me'}
+				});
+				self.setState(newState);
+				/*self.props.book.saveComment(self.state)
 
 				const newState = update(self.state, {
 					commented	: {$set: true},
 				});
-				self.setState(newState);
+				self.setState(newState);*/
 			}
 		);
 	}
 
 	render() {
 		const { comments } = this.props.book;
-console.log(comments)
+
 		return (
 			<div className="portlet -w100">
 				<div className="portlet_head">
@@ -90,7 +97,7 @@ console.log(comments)
 									.sort((a,b) => b.timestamp - a.timestamp)
 									.map((item, key) => {
 									return (
-										<Comment key={key} data={item} />
+										<Comment key={key} book={this.props.book} data={item} />
 									)
 								})
 							:

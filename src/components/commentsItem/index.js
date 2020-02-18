@@ -13,16 +13,24 @@ class Comment extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = props.data;
+		this.state = {
+			...props.data,
+			editing: false
+		}
+
 console.log(props.data)
+		/*if(props.match.params.id)
+			this.state = api.booksAPI.get(props.data.id)*/
+
 		this.handleInputChange	= this.handleInputChange.bind(this);
-		this.handleActionEdit 	= this.handleActionEdit.bind(this);
-		this.handleEditing		= this.handleEditing.bind(this);
-		this.handleDelete		= this.handleDelete.bind(this);
+		this.handleActionEdit	= this.handleActionEdit.bind(this);
+		this.handleEditing	= this.handleEditing.bind(this);
+
 	}
 
 	handleActionEdit(event) {
 		this.setState({
+			...this.props.data,
 			editing: true
 		})
 	}
@@ -35,7 +43,6 @@ console.log(props.data)
 		this.setState({
 			[name]: value
 		});
-
 	}
 
 	handleEditing(event) {
@@ -44,9 +51,17 @@ console.log(props.data)
 			return;
 		}
 
+
+
 		let self = this;
 
-		Notiflix.Report.Init({
+		self.props.book.saveComment(self.state)
+		self.setState({
+			...self.props.data,
+			editing: false
+		})
+		console.log("Editado: ",self.state)
+		/*Notiflix.Report.Init({
 			messageFontSize:"15px",
 			titleFontSize:"22px",
 			success: {svgColor:"#3cd08c",}
@@ -57,50 +72,26 @@ console.log(props.data)
 			'Okay',
 
 			function() {
+				self.props.book.saveComment(self.state)
 				const newState = update(self.state, {
 					editing	: {$set: false},
 				});
-				api.booksAPI.get(self.props.data.parentId).saveComment(newState)
 				self.setState(newState);
 			}
-		);
+		);*/
 	}
 
-	handleDelete(event) {
-		event.preventDefault();
-		let self = this;
-
-		Notiflix.Report.Init({
-			messageFontSize:"15px",
-			titleFontSize:"22px",
-			success: {svgColor:"#3cd08c",}
-		});
-		Notiflix.Report.Success(
-			'Success!',
-			'Comment successfully registered',
-			'Okay',
-
-			function() {
-				const newState = update(self.state, {
-					deleted	: {$set: 1},
-					editing	: {$set: false},
-				});
-				api.booksAPI.get(self.props.data.parentId).saveComment(newState)
-				self.setState(newState);
-			}
-		);
-	}
 
 	render() {
 		const { editing } = this.state;
-
-
+		const { data } = this.props;
+		
 		return (
 			<div className="comment">
 				<i className="comment_icon"></i>
 				<div className="comment_content">
-					<div className="comment_name">{this.state.author}</div>
-					<div className="comment_date"><Moment fromNow>{this.state.timestamp}</Moment></div>
+					<div className="comment_name">{Date.now()+" | "+data.author}</div>
+					<div className="comment_date"><Moment fromNow>{data.timestamp}</Moment></div>
 					<div className="comment_new">new</div>
 					<div className="comment_menu">
 						<div className="comment_menu-burguer"></div>
@@ -117,7 +108,7 @@ console.log(props.data)
 					</div>
 					<div className="comment_text">
 						{!editing ?
-							this.state.body
+							data.body
 							:
 							<form className="form" onSubmit={this.handleEditing}>
 								<div className="form_group -w100">
@@ -137,3 +128,42 @@ console.log(props.data)
 }
 
 export default Comment;
+
+/*
+			<div className="comment">
+				<i className="comment_icon"></i>
+				<div className="comment_content">
+					<div className="comment_name">{Date.now()+" | "+data.author}</div>
+					<div className="comment_date"><Moment fromNow>{data.timestamp}</Moment></div>
+					<div className="comment_new">new</div>
+					<div className="comment_menu">
+						<div className="comment_menu-burguer"></div>
+						<div className="comment_menu-content">
+							<div className="comment_menu-link" onClick={this.handleActionEdit}>
+								<div className="comment_menu-icon -edit"></div>
+								Edit
+							</div>
+							<div className="comment_menu-link" onClick={this.handleDelete}>
+								<div className="comment_menu-icon -delete"></div>
+								Delete
+							</div>
+						</div>
+					</div>
+					<div className="comment_text">
+						{!editing ?
+							data.body
+							:
+							<form className="form" onSubmit={this.handleEditing}>
+								<div className="form_group -w100">
+									<textarea name="body" value={this.state.body} onChange={this.handleInputChange} className="form_input -textarea" required></textarea>
+									<span className="form_validation">Error or just validation</span>
+								</div>
+								<div className="form_group -w100">
+									<button className="button -submit -mr_20">Save</button>
+								</div>
+							</form>
+						}
+					</div>
+				</div>
+			</div>
+ */
