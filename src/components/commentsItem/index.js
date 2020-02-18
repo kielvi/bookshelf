@@ -18,14 +18,10 @@ class Comment extends React.Component {
 			editing: false
 		}
 
-console.log(props.data)
-		/*if(props.match.params.id)
-			this.state = api.booksAPI.get(props.data.id)*/
-
 		this.handleInputChange	= this.handleInputChange.bind(this);
 		this.handleActionEdit	= this.handleActionEdit.bind(this);
 		this.handleEditing	= this.handleEditing.bind(this);
-
+		this.handleDelete	= this.handleDelete.bind(this);
 	}
 
 	handleActionEdit(event) {
@@ -51,17 +47,9 @@ console.log(props.data)
 			return;
 		}
 
-
-
 		let self = this;
 
-		self.props.book.saveComment(self.state)
-		self.setState({
-			...self.props.data,
-			editing: false
-		})
-		console.log("Editado: ",self.state)
-		/*Notiflix.Report.Init({
+		Notiflix.Report.Init({
 			messageFontSize:"15px",
 			titleFontSize:"22px",
 			success: {svgColor:"#3cd08c",}
@@ -72,15 +60,39 @@ console.log(props.data)
 			'Okay',
 
 			function() {
-				self.props.book.saveComment(self.state)
 				const newState = update(self.state, {
 					editing	: {$set: false},
 				});
+				self.props.book.saveComment(newState)
 				self.setState(newState);
 			}
-		);*/
+		);
 	}
 
+	handleDelete(event) {
+		event.preventDefault();
+		let self = this;
+
+		Notiflix.Report.Init({
+			messageFontSize:"15px",
+			titleFontSize:"22px",
+			success: {svgColor:"#3cd08c",}
+		});
+		Notiflix.Report.Success(
+			'Success!',
+			'Comment successfully registered',
+			'Okay',
+
+			function() {
+				const newState = update(self.state, {
+					deleted	: {$set: 1},
+					editing	: {$set: false},
+				});
+				self.props.book.saveComment(newState)
+				self.setState(newState);
+			}
+		);
+	}
 
 	render() {
 		const { editing } = this.state;
@@ -90,7 +102,7 @@ console.log(props.data)
 			<div className="comment">
 				<i className="comment_icon"></i>
 				<div className="comment_content">
-					<div className="comment_name">{Date.now()+" | "+data.author}</div>
+					<div className="comment_name">{data.author}</div>
 					<div className="comment_date"><Moment fromNow>{data.timestamp}</Moment></div>
 					<div className="comment_new">new</div>
 					<div className="comment_menu">

@@ -17,6 +17,7 @@ class Comments extends React.Component {
 			id 			: '',
 			body 		: '',
 			author 		: 'Me',
+			deleted		: 0,
 		};
 
 		this.handleInputChange	= this.handleInputChange.bind(this);
@@ -95,6 +96,7 @@ class Comments extends React.Component {
 							{comments.length>0 ?
 								comments
 									.sort((a,b) => b.timestamp - a.timestamp)
+									.filter((item)=> !item.deleted)
 									.map((item, key) => {
 									return (
 										<Comment key={key} book={this.props.book} data={item} />
