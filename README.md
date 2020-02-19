@@ -11,7 +11,12 @@ Aplicativo de inserção, edição e controle de livros, sendo eles podendo ser 
 
 ### Instalação
 
-In the project directory, you can run:
+Após clonar este repositório e acessar a pasta do projeto, instale todas as dependências com
+
+```sh
+npm install --save moment react-moment
+```
+
 
 ### `npm start`
 
