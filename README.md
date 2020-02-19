@@ -6,17 +6,22 @@ Este projeto foi iniciado com [Create React App](https://github.com/facebook/cre
 Aplicativo de inserção, edição e controle de livros, sendo eles podendo ser categorizados por: Lidos, quero ler e estou lendo.
 
 - [Instalação](#instalação)
-- [Timezone Support](#timezone-support)
+- [Iniciando o aplicativo](#Iniciando o aplicativo)
 - [Quick Start](#quick-start)
 
 ### Instalação
 
-Após clonar este repositório e acessar a pasta do projeto, instale todas as dependências com
+Após clonar este repositório e acessar a pasta do projeto, instale todas as dependências com:
+```sh
+npm install
+```
 
+### Iniciando o aplicativo
+
+Após a instalacao do projeto, execute o seguinte comando para iniciar:
 ```sh
 npm install --save moment react-moment
 ```
-
 
 ### `npm start`
 
