@@ -29,7 +29,7 @@ npm start
 Todos os dados do projeto são armazenados em localStorage e manipulados através de uma `api`, localizado na raiz do projeto com nome `api.js`. O intuíto de uso do mesmo, se faz devido a centralização de manipulação e busca de dados inseridos.
 
 ### Openlibrary
-Ao adicionar um novo livro, o código ISBN pode ser usado para uma busca de dados da [Openlibrary.org](http://openlibrary.org/). Para mais informações sobre a api, visite a [documentação oficial](https://openlibrary.org/developers/api)
+Ao adicionar um novo livro, o código ISBN pode ser usado para uma busca de dados da `Openlibrary`. Para mais informações sobre, visite a [documentação oficial](https://openlibrary.org/developers/api)
 
 
 ### Metodologia BEM
