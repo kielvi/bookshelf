@@ -6,7 +6,7 @@ Este projeto foi iniciado com [Create React App](https://github.com/facebook/cre
 Aplicativo de inserção, edição e controle de livros, sendo eles podendo ser categorizados por: Lidos, quero ler e estou lendo.
 
 - [Instalação](#instalação)
-- [Iniciando o aplicativo](#Iniciando o aplicativo)
+- [Iniciando o aplicativo](#Iniciando-o-aplicativo)
 - [Quick Start](#quick-start)
 
 ### Instalação
