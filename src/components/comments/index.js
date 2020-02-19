@@ -24,6 +24,14 @@ class Comments extends React.Component {
 		this.handleSubmit		= this.handleSubmit.bind(this);
 	}
 
+	componentDidMount() {
+		Notiflix.Report.Init({
+			messageFontSize:"15px",
+			titleFontSize:"22px",
+			success: {svgColor:"#3cd08c",}
+		});
+	}
+
 	handleInputChange(event) {
 		let target = event.target;
 		let value = target.value;
@@ -41,12 +49,7 @@ class Comments extends React.Component {
 		}
 
 		let self = this;
-
-		Notiflix.Report.Init({
-			messageFontSize:"15px",
-			titleFontSize:"22px",
-			success: {svgColor:"#3cd08c",}
-		});
+	
 		Notiflix.Report.Success(
 			'Success!',
 			'Comment successfully registered',
@@ -67,7 +70,7 @@ class Comments extends React.Component {
 
 	render() {
 		const { comments } = this.props.book;
-		const update = () => this.forceUpdate();
+		const onDelete = () => this.forceUpdate();
 		const onEdit = () => this.forceUpdate();
 
 		return (
@@ -88,16 +91,15 @@ class Comments extends React.Component {
 						<div className="form_separator"></div>
 					</form>
 					<div className="comments_items">
-						
 							{!comments ?
 								<div className="alert">No comments found</div>
 							:
 								comments
-									.sort((a,b) => b.timestamp - a.timestamp)
 									.filter((item)=> !item.deleted)
+									.sort((a,b) => b.timestamp - a.timestamp)
 									.map((item, key) => {
 									return (
-										<Comment key={key} book={this.props.book} data={item} onEdit={ onEdit } onDelete={ update } />
+										<Comment key={key} book={this.props.book} data={item} onEdit={ onEdit } onDelete={ onDelete } />
 									)
 								})
 							}

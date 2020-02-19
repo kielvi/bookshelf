@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
 import CategoryItem from '../categoryItem/'
+import Breadcrumbs from '../breadcrumbs/'
+import { Redirect, Link } from "react-router-dom";
 import api from '../../api';
 import './categories.css'
 
@@ -67,8 +69,19 @@ class Categories extends React.Component {
 		const { category_title } = this.state;
 		let total = books.length;
 
+		const breadcrumbs = [
+			{
+				title: category_title
+			}
+		]
+
 		return (
 			<div className="container">
+				<div className="headings">
+					<Breadcrumbs {...breadcrumbs} />
+					<Link to='/' className="headings_back">Back</Link>
+				</div>
+
 				{total ? 
 					<div className="category">
 						<div className="category_title">{category_title}</div>

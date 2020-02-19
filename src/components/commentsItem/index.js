@@ -24,6 +24,14 @@ class Comment extends React.Component {
 		this.handleDelete	= this.handleDelete.bind(this);
 	}
 
+	componentDidMount() {
+		Notiflix.Report.Init({
+			messageFontSize:"15px",
+			titleFontSize:"22px",
+			success: {svgColor:"#3cd08c",}
+		});
+	}
+
 	handleActionEdit(event) {
 		this.setState({
 			...this.props.data,
@@ -49,11 +57,6 @@ class Comment extends React.Component {
 
 		let self = this;
 
-		Notiflix.Report.Init({
-			messageFontSize:"15px",
-			titleFontSize:"22px",
-			success: {svgColor:"#3cd08c",}
-		});
 		Notiflix.Report.Success(
 			'Success!',
 			'Comment successfully edited',
@@ -75,11 +78,6 @@ class Comment extends React.Component {
 		event.preventDefault();
 		let self = this;
 
-		Notiflix.Report.Init({
-			messageFontSize:"15px",
-			titleFontSize:"22px",
-			success: {svgColor:"#3cd08c",}
-		});
 		Notiflix.Report.Success(
 			'Success!',
 			'Comment successfully registered',
