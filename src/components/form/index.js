@@ -3,7 +3,6 @@ import { Redirect, useHistory } from "react-router-dom";
 import update from 'immutability-helper';
 import Notiflix from "notiflix-react";
 import "notiflix-react/dist/notiflix-react-1.4.0.css";
-
 import Breadcrumbs from '../breadcrumbs/'
 import api from '../../api';
 
@@ -142,10 +141,16 @@ class Form extends React.Component {
 		const { photo } = this.state;
 		const { photoLoading } = this.state;
 
+		const breadcrumbs = [
+			{
+				title: "Insert new book"
+			},
+		]
+
 		return (
 			<div className="container">
 				<div className="headings">
-					<Breadcrumbs />
+					<Breadcrumbs {...breadcrumbs} />
 					<a href="" className="headings_back">Back</a>
 
 					<div className="headings_title">Insert new book</div>

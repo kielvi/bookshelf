@@ -14,12 +14,16 @@ class Book extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = api.booksAPI.get(this.props.match.params.id);
+		this.state = {
+			...api.booksAPI.get(this.props.match.params.id)
+		}
 
-		this.deleteBook	= this.deleteBook.bind(this);
+		this.deleteBook				= this.deleteBook.bind(this);
+		this.handleCategoryChange	= this.handleCategoryChange.bind(this);
 	}
 
 	componentDidMount() {
+
 		Notiflix.Confirm.Init({
 			width:'320px',
 			borderRadius:'4px',
@@ -32,11 +36,21 @@ class Book extends React.Component {
 		})
 	}
 
+	handleCategoryChange(value) {
+		const newState = update(this.state, {
+			category: {$set: value}
+		});
+
+		api.booksAPI.save(newState)
+		this.setState(newState);
+		Notiflix.Notify.Success('Category changed successfully');
+	}
+
 	deleteBook(event) {
 		event.preventDefault();
-  
-  		let self = this;
-  		let deleted = (this.state.deleted==0 ? 1 : 0);
+ 
+		let self = this;
+		let deleted = (this.state.deleted==0 ? 1 : 0);
 
 		Notiflix.Confirm.Show(
 			'Delete book',
@@ -48,9 +62,10 @@ class Book extends React.Component {
 				const newState = update(self.state, {
 					deleted: {$set: deleted}
 				});
-				
+				console.log(newState)
+				api.booksAPI.save(newState)
 				self.setState(newState);
-				api.booksAPI.save(self.state)
+
 			},
 		);
 	}
@@ -58,17 +73,24 @@ class Book extends React.Component {
 
 	render() {
 		let limit = 1200;
-		const book = this.state;
-		const category = book.category;
-		const description = book.description
-		const totalComments = (book.comments ? book.comments.length : '');
+		const book = api.booksAPI.get(this.state.id);
 		const allCategories = api.categories.asArray.splice(1);
-		const { redirect } = this.state;
+		const totalComments = (book.comments ? book.comments.length : 0);
+
+		const breadcrumbs = [
+			{
+				title: book.category_name,
+				link: '/books/categories/'+book.category
+			},
+			{
+				title: book.title
+			},
+		]
 
 		return (
 			<div className="container book">
 				<div className="headings">
-					<Breadcrumbs />
+					<Breadcrumbs {...breadcrumbs} />
 					<Link to='/' className="headings_back">Back</Link>
 				</div>
 
@@ -77,21 +99,21 @@ class Book extends React.Component {
 						<div className="book_photo" style={{backgroundImage: "url("+book.photo+")"}}> </div>
 
 						<div className="book_content">
-							<div className="book_title">{book.title}</div>
+							<div className="book_title">{book.title+" | "+Date.now()}</div>
 
 							<div className="book_buttons">
 								<div onClick={this.deleteBook} className="button -sm -red -mr_5 -icon -delete">{!book.deleted ? 'Delete book' : 'Restore book'}</div>
 								<Link to={`/book/${book.id}/edit`} className="button -sm -basic -icon -edit">Edit book</Link>
 							</div>
 
-							{description.length > limit ?
+							{book.description.length > limit ?
 								(
 									<div className="book_description">
-										{`${description.substring(0, limit)}...`}
+										{`${book.description.substring(0, limit)}...`}
 									</div>
 								) :
 									<div className="book_description">
-										{description}
+										{book.description}
 									</div>
 							}
 
@@ -103,7 +125,7 @@ class Book extends React.Component {
 								</div>
 								<div className="book_info-item">
 									<div className="book_info-title">Category</div>
-									<Link to={`/books/categories/${category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
+									<Link to={`/books/categories/${book.category}`} className={`book_info-label -${book.category_class}`}>{book.category_name}</Link>
 									<div className="book_menu">
 										<div className="book_menu-burguer"></div>
 										<div className="book_menu-content">
@@ -112,7 +134,7 @@ class Book extends React.Component {
 													.sort((a,b) => a.name.localeCompare(b.name))
 													.map((category, i) => {
 													return (
-														<div className="book_menu-link">
+														<div className="book_menu-link" key={i} onClick={() => this.handleCategoryChange(`${category.id}`)}>
 															<div className={`book_menu-icon -${category.class}`}></div>
 															{category.name}
 														</div>
@@ -124,8 +146,6 @@ class Book extends React.Component {
 								</div>
 							</div>
 						</div>
-
-
 
 						<div className="book_separator"></div>
 
@@ -180,10 +200,12 @@ class Book extends React.Component {
 								<div className="book_label-text">{totalComments>0 ? totalComments+" comment(s)" : "No comments yet" }</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 
 				<Comments book={book} />
+
 			</div>
 		)
 	}
