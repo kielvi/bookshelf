@@ -5,11 +5,11 @@ Este projeto foi iniciado com [Create React App](https://github.com/facebook/cre
 
 Aplicativo de inserção, edição e controle de livros, sendo eles podendo ser categorizados por: Lidos, quero ler e estou lendo.
 
-- [Instalacao](#instalacao)
+- [Instalação](#instalação)
 - [Timezone Support](#timezone-support)
 - [Quick Start](#quick-start)
 
-### instalacao
+### Instalação
 
 In the project directory, you can run:
 
