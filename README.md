@@ -18,6 +18,8 @@ Após clonar este repositório e acessar a pasta do projeto, instale todas as de
 npm install
 ```
 
+
+
 ### Iniciando o projeto
 
 Após a instalação do projeto, execute o seguinte comando para iniciar:
@@ -25,11 +27,18 @@ Após a instalação do projeto, execute o seguinte comando para iniciar:
 npm start
 ```
 
+
+
 ### Api
 Todos os dados do projeto são armazenados em localStorage e manipulados através de uma `api`, localizado na raiz do projeto com nome `api.js`. O intuíto de uso do mesmo, se faz devido a centralização de manipulação e busca de dados inseridos.
 
+
+
+
 ### Openlibrary
 Ao adicionar um novo livro, o código ISBN pode ser usado para uma busca de dados da `Openlibrary`. Para mais informações sobre, visite a [documentação oficial](https://openlibrary.org/developers/api)
+
+
 
 
 ### Metodologia BEM
