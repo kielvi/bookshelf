@@ -1,8 +1,9 @@
-Sheetgo Virtual Bookshelf Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este projeto foi iniciado com [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Sheetgo Virtual Bookshelf Project
+
+Aplicativo de inserção, edição e controle de livros, sendo eles podendo ser categorizados por: Lidos, quero ler e estou lendo.
 
 In the project directory, you can run:
 
