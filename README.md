@@ -9,6 +9,7 @@ Aplicativo de inserção, edição e controle de livros, sendo eles podendo ser 
 - [Iniciando o projeto](#Iniciando-o-projeto)
 - [Api](#api)
 - [Metodologia BEM](#metodologia-bem)
+- [Demo] (#demo)
 
 ### Instalação
 
@@ -32,4 +33,5 @@ Todos os dados do projeto são armazenados em localStorage e manipulados atravé
 Todo o visual foi desenvolvido utilizando metologia BEM, para auxiliar na escrita de um SASS/CSS mais inteligente, código reutilizável e sustentável. Além de convenções de nomeação, tornando mais informativo e fácil de entender.
 
 
-
+### Demontracação
+Para visualizar o funcionamento do projeto projeto: https://codesandbox.io/s/github/kielvi/bookshelf 
